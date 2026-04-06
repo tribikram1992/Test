@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epcis:EPCISDocument xmlns:epcis="urn:epcglobal:epcis:xsd:1" xmlns:BaxExt="http://www.baxter.com/pedigree" xmlns:cbvmda="urn:epcglobal:cbv:mda" xmlns:core="urn:epcglobal:hls:1" xmlns:gs1ushc="http://epcis.gs1us.org/hc/ns" xmlns:sbdh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader" xmlns:tl="http://epcis.tracelink.com/ns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" creationDate="2017-08-08T14:30:02.338Z" schemaVersion="1.2">
+  <EPCISBody>
+    <EventList>
+      <ObjectEvent>
+        <eventTime>2025-12-18T17:49:42.059Z</eventTime>
+        <eventTimeZoneOffset>-05:00</eventTimeZoneOffset>
+        <epcList>
+          <epc>urn:epc:id:sscc:5413760.3000037291</epc>
+        </epcList>
+        <action>OBSERVE</action>
+        <bizStep>urn:epcglobal:cbv:bizstep:shipping</bizStep>
+        <disposition>urn:epcglobal:cbv:disp:in_transit</disposition>
+        <readPoint>
+          <id>urn:epc:id:sgln:0085412.00006.0</id>
+        </readPoint>
+        <bizLocation>
+          <id>urn:epc:id:sgln:0085412.00006.0</id>
+        </bizLocation>
+        <bizTransactionList>
+          <bizTransaction type="urn:epcglobal:cbv:btt:to">8612529</bizTransaction>
+          <bizTransaction type="urn:BaxExt:cbv:btt:sn">18409560</bizTransaction>
+          <bizTransaction type="urn:epcglobal:cbv:btt:po">8BO-0Gy-50476-n</bizTransaction>
+          <bizTransaction type="urn:BaxExt:cbv:btt:poln">0</bizTransaction>
+          <bizTransaction type="urn:epcglobal:cbv:btt:desadv">20251218120050121038688</bizTransaction>
+        </bizTransactionList>
+        <extension>
+          <sourceList>
+            <source type="urn:epcglobal:cbv:sdt:owning_party">0085412000008</source>
+            <source type="urn:epcglobal:cbv:sdt:location">urn:epc:id:sgln:0085412.00006.0</source>
+          </sourceList>
+          <destinationList>
+            <destination type="urn:epcglobal:cbv:sdt:owning_party">urn:epc:id:sgln:0630140.00062.0</destination>
+            <destination type="urn:epcglobal:cbv:sdt:location">urn:epc:id:sgln:0630140.00062.0</destination>
+          </destinationList>
+        </extension>
+      </ObjectEvent>
+    </EventList>
+  </EPCISBody>
+</epcis:EPCISDocument>
