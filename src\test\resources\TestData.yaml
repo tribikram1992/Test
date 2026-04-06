@@ -1,0 +1,107 @@
+DEV:
+  url: https://baxter-qa.track-n-trace.net/userlogin.do
+  testUser: 
+  validPassword: 
+  gtinValue: 05413760476537
+  productName: SEVOFLURANE_250ML
+  Shipment_Permit_Number: SHP/MP/48913/2020
+  productNameForBahrain: DEXTROSE_5%_W/V_250ML50_G/L_SOLN_IV_VIAFLEX
+  productNameForKorea: TISSEEL_VHSD_SA_FROZ_AST_4ML
+  aipUrl: https://qaint-wahecs-ic.aws.baxter.com/ic/logon.html
+  aipApplicationName: EPCIS-SWLCA
+  productNameFor58174: Product_test
+  wrongManufacturingMessage: Manufacturing_Date_must_be_in_standard_date_format_(YYYY-MM-DD)
+  emptyPalletMessage: DATA_VALIDATION_INCORRECT_ITEM_ID_ERROR
+  dispositionStatus: Dispensed_Destroyed_FreeSampled_Sampled_Exported_Dispensed_Destroyed_FreeSampled_Sampled_Exported_Dispensed_Destroyed_FreeSampled_Sampled_Exported
+  productNameForSaudi: DNL_PD4_2.27%_5L/5L_SY2_SB
+  palletCode: "0085412-3"
+  TestCase:
+    SeP_RTS_OQ_SoftDeleteTest:
+      Customer1:
+        CustomerName: Customer SoftDelete A 
+        IdentificationType: EXTERNAL_DEF
+        AddressLine1: "987 State Street"
+        AddressLine2: 
+        City: "Chicago"
+        State: "ILLINOIS"
+        ZipCode: "60654"
+        Country: "US"
+        IsAuthorizedTradingPartner: "Yes"
+      Customer2:
+        CustomerName: Customer SoftDelete B 
+        IdentificationType: EXTERNAL_DEF
+        AddressLine1: "1616 Mockingbird Lane Suite A"
+        AddressLine2: 
+        City: "Spingfield"
+        State: "ILLINOIS"
+        ZipCode: "62370"
+        Country: "US"
+        IsAuthorizedTradingPartner: "Yes"
+    SeP_RTS_OQ_5828Test:
+      MarketingAuthorizationHolderName: "Baxter AS"
+      AttributeValue: "baxter_qa_aipwsuser"
+      NoOfDays : "300"
+    SeP_RTS_State_Transition_Verification:
+      ItemID: "00085412160900"
+    SeP_RTS_OQ_EvetTime_Test:
+      ProductGTIN: "05413765812071"
+      Case: "55413765812076"
+      Pallet: "5413760-3"
+      ProductSiteID: "Baxter Healthcare Corporation"
+      CaseSiteID: "Baxter Healthcare Corporation"
+      PalletSiteID: "Baxter Halle"
+    UAERegressionTest:
+     productCode: "05413760476537"
+     shipmentNumber: "SHP/MP/48913/2020"
+    BahrainRegressionTest:
+     productCode: "06285064000300"
+     caseCode: "50085412949319" 
+    SharedCodeBhSaTest:
+      productCode: "06285064000300"
+      palletCode: "0085412-4"
+    SharedCodeEuSaTest:
+      productCode: "37332414107124"
+      palletCode: "0085412-4"
+    SaudiRegressionTestInternal:
+      productCode: "06285064000300"
+    SaudiRegressionTestImport:
+      productCode: "06285064000300"
+    SaudiRegressionTestExport:
+      productCode: "06285064000300"
+    SaudiNegativeTest:
+      productCode: "06285064000300"
+    koreanGoldenGateTest:
+      productCode: "08806553002544"
+      caseCode: "58806553002549"
+    koreanGlobalScapeTest:
+      productCode: "08806553002544"
+      palletCode: "0085412-3"
+    EuRegressionTest:
+      productCode: "35413760481020"
+      palletCode: "5413760-3"
+      secondProductCode: "03400957557720"
+    SwissLogUsTest:
+      productCode: "00303389568018"
+      palletCode: "5413760-3"
+      caseCode: "50303380102049"
+    SwissLogMultipleScenarioTest:
+      productCode: "00303389568018"
+      firstCase: "50303380102049"
+      secondCase: "50303380102049"
+      palletCodeForThird: "5413760-3"
+      caseCodeForThird: "50303380102049"
+      palletCodeForFourth: "5413760-3"
+      caseCodeForFourth: "50303380116206"
+      partialPalletCodeForSixth: "5413760-5"
+      palletCodeForSixth: "5413760-3"
+      sixthCase: "50303380102049"
+      palletCodeForSeventh: "5413760-3"
+      seventhCase: "50303380102049"
+UAT:
+  url: 
+  testUser: ADALAMR
+  validPassword: 4144414c414d52
+TEST:
+  url: 
+  testUser: ADALAMR
+  validPassword1: 584142746572
