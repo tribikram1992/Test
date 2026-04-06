@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<epcis:EPCISDocument xmlns:epcis="urn:epcglobal:epcis:xsd:1" xmlns:BaxExt="http://www.baxter.com/pedigree" xmlns:core="urn:epcglobal:hls:1" xmlns:f="urn:ibm:rfidic:pedigree:1" xmlns:gs1ushc="http://epcis.gs1us.org/hc/ns" xmlns:ibm="http://www.ibm.com/xmlns/prod/ts/events/pedigree" xmlns:sbdh="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader" xmlns:xalan="http://xml.apache.org/xalan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" creationDate="2022-07-11T16:20:33.085+01:00" schemaVersion="1.0" xsi:schemaLocation="http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader schema0.xsd">
+  <EPCISBody>
+    <EventList>
+      <ObjectEvent>
+        <eventTime>2026-03-09T22:01:18.355Z</eventTime>
+        <eventTimeZoneOffset>+01:00</eventTimeZoneOffset>
+        <epcList>
+          <epc>urn:epc:id:sscc:5413760.3100006078</epc>
+        </epcList>
+        <action>OBSERVE</action>
+        <bizStep>urn:epcglobal:cbv:bizstep:shipping</bizStep>
+        <disposition>urn:epcglobal:cbv:disp:in_transit</disposition>
+        <readPoint>
+          <id>urn:epc:id:sgln:0085412.00022.0</id>
+        </readPoint>
+        <bizLocation>
+          <id>urn:epc:id:sgln:0085412.00022.0</id>
+        </bizLocation>
+        <bizTransactionList>
+          <bizTransaction type="urn:epcglobal:cbv:btt:to">TO-5829SDT891324</bizTransaction>
+          <bizTransaction type="urn:BaxExt:cbv:btt:sn">SN-5829SDT891324</bizTransaction>
+          <bizTransaction type="urn:epcglobal:cbv:btt:po">PO-5829SDT891324</bizTransaction>
+        </bizTransactionList>
+        <gs1ushc:transferredById type="BaxAB">0085412000008</gs1ushc:transferredById>
+        <gs1ushc:shipFromLocationId type="BaxAB">urn:epc:id:sgln:0085412.00022.0</gs1ushc:shipFromLocationId>
+        <gs1ushc:transferredToId type="BaxAB">9750211972</gs1ushc:transferredToId>
+        <gs1ushc:shipToLocationId type="BaxAB">9750211972</gs1ushc:shipToLocationId>
+      </ObjectEvent>
+    </EventList>
+  </EPCISBody>
+</epcis:EPCISDocument>
