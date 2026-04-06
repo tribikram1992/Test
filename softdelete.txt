@@ -1,0 +1,66 @@
+The following test was performed by Mike Gattone on January 11, 2024
+Step Name	Description	Expected Result	Evidence Required
+Step 1	Create 2 new Customers in RTS-->Setup. Note the names and Customer IDs for both the customers	New customers are created in RTS. Also note Customer IDs for both the customers	Y
+
+Actual: Two new customers were created:
+
+“5827 Deleted Customer” (Customer ID=5827111111)
+“5827 New Customer” (Customer ID=582799999)
+
+Screen captures attached
+
+Result: PASSED
+
+Evidence
+
+Figure 1: Screen capture showing the two new customers that were created for this test
+
+Figure 2: Customer details for “5827 Deleted Customer”
+
+Figure 3: Facility details for “5827 Deleted Customer” - note Interchange ID is highlighted
+
+Figure 4: Customer details for “5827 New Customer”
+
+Figure 5: Facility details for “5827 New Customer” - note Interchange ID is highlighted
+
+Step Name	Description	Expected Result	Evidence Required
+Step 2	Delete the first customer location from those created in step 1	Customer location is deleted successfully.	Y
+
+Actual: “5827 Deleted Customer” is deleted from RTS. Screen captures are attached.
+
+Result: PASSED
+
+Evidence
+
+Figure 6: Screen capture showing the Customer (to be deleted) and Action
+
+Figure 7: Screen capture of confirmation dialog for deletion of “5827 Deleted Customer”
+
+Figure 8: Screen capture showing that “5827 Deleted Customer” has been deleted
+
+Step Name	Description	Expected Result	Evidence Required
+Step 3	Add Customer ID 1 as Interchange ID to second Customer location created in step 1	Customer ID of location 1 is added as Interchange ID for Customer location 2	Y
+
+Actual: Customer ID from "5827 Deleted Customer" was added as an interchange ID on the facility under "5827 New Customer". Screen capture attached.
+
+Result: PASSED
+
+Evidence
+
+
+Figure 9: Screen capture showing interchange ID being added - note Interchange ID Qualifier, Interchange ID and Action
+
+Figure 10: Screen capture of Interchange Information for “5827 New Customer” facility record - note that interchange ID has been saved
+
+Step Name	Description	Expected Result	Evidence Required
+Step 4	Ship a serial number with destination location value of Customer ID 1. Ship event should post successfully to RTS and show in Trace-->Events with Customer ID 2	Ship event is processed successfully and displays the second Customer details in RTS UI	Y
+
+Actual: A small batch ("5827SDT1") was created and posted to RTS. The batch was shipped to 5827111111. The ship-to was translated correctly and resolved to "5827 New Customer". See screen captures attached.
+
+Result: PASSED
+
+Evidence
+
+Figure 11: Screen capture of Batch Summary Report from RTS-Dev for 5827SDT1
+
+Figure 12: Screen capture of ship events details, note Receiver Owner and Receiver Custodian values have resolved to “5827 New Customer”
