@@ -1,7 +1,7 @@
 DEV:
   url: https://baxter-qa.track-n-trace.net/userlogin.do
-  testUser: 
-  validPassword: 
+  testUser:
+  validPassword:
   gtinValue: 05413760476537
   productName: SEVOFLURANE_250ML
   Shipment_Permit_Number: SHP/MP/48913/2020
@@ -15,34 +15,63 @@ DEV:
   dispositionStatus: Dispensed_Destroyed_FreeSampled_Sampled_Exported_Dispensed_Destroyed_FreeSampled_Sampled_Exported_Dispensed_Destroyed_FreeSampled_Sampled_Exported
   productNameForSaudi: DNL_PD4_2.27%_5L/5L_SY2_SB
   palletCode: "0085412-3"
+
   TestCase:
+
     SeP_RTS_OQ_SoftDeleteTest:
+
       Customer1:
-        CustomerName: Customer SoftDelete A 
+        CustomerName: Customer SoftDelete A
         IdentificationType: EXTERNAL_DEF
         AddressLine1: "987 State Street"
-        AddressLine2: 
+        AddressLine2:
         City: "Chicago"
         State: "ILLINOIS"
         ZipCode: "60654"
         Country: "US"
         IsAuthorizedTradingPartner: "Yes"
+
       Customer2:
-        CustomerName: Customer SoftDelete B 
+        CustomerName: Customer SoftDelete B
         IdentificationType: EXTERNAL_DEF
         AddressLine1: "1616 Mockingbird Lane Suite A"
-        AddressLine2: 
+        AddressLine2:
         City: "Spingfield"
         State: "ILLINOIS"
         ZipCode: "62370"
         Country: "US"
         IsAuthorizedTradingPartner: "Yes"
-    SeP_RTS_OQ_5828Test:
-      MarketingAuthorizationHolderName: "Baxter AS"
-      AttributeValue: "baxter_qa_aipwsuser"
-      NoOfDays : "300"
+
+      # Serialize / Allocate configuration
+      SerializeConfig:
+        ProductGTIN: "20343066995243"
+        ProductSiteID: "Baxter Healthcare Corporation"
+        ProductCount: 2
+        CaseGTIN: "50343066995244"
+        CaseSiteID: "Baxter Healthcare Corporation"
+        CaseCount: 1
+        PalletGTIN: "5413760-3"
+        PalletSiteID: "Baxter Halle"
+        PalletCount: 1
+        EventTypeToSearch: "Ship"
+
+      # Aggregate XML configuration
+      AggregateXmlFile: "SDT5829_Test.xml"
+      AggregateXml:
+        LotNumberTagCount: 3
+        DestinationCount: 2
+
+      # Shipping XML configuration
+      ShippingXmlFile: "SDT5827_ShippingTest.xml"
+
     SeP_RTS_State_Transition_Verification:
       ItemID: "00085412160900"
+      # New parameterised keys
+      Disposition1: "Non Sellable Other"
+      Disposition2: "Received"
+      SiteID: "Baxter Halle - Manufacturing"
+      EventType: "Change Disposition"
+
     SeP_RTS_OQ_EvetTime_Test:
       ProductGTIN: "05413765812071"
       Case: "55413765812076"
@@ -50,40 +79,84 @@ DEV:
       ProductSiteID: "Baxter Healthcare Corporation"
       CaseSiteID: "Baxter Healthcare Corporation"
       PalletSiteID: "Baxter Halle"
+      # New parameterised keys
+      ProductCount: 10
+      CaseCount: 5
+      PalletCount: 2
+      AggregateXmlFile: "5829ETT_Testing.xml"
+      AggregateXml:
+        LotNumberTagCount: 3
+      ReworkXmlFile: "5829ETT_Rework_testing.xml"
+      ReworkXml:
+        ReworkCaseCount: 4
+        ReworkPalletCount: 2
+      ShippingXmlFile: "5829ETT_Shipping_Testing.xml"
+      ShippingXml:
+        ShippingPalletIndex: 1
+      VerificationConfig:
+        EventTimeVerificationCount: 4
+        ShipEventCount: 1
+        AggregateEventCount: 7
+        DisaggregateEventCount: 1
+        CommissionEventCount: 3
+        BatchSummary:
+          NoOfPackedProduct: 2
+          NoOfInTransitProduct: 8
+          NoOfPackedCases: 1
+          NoOfInTransitCases: 4
+          NoOfPackedPallets: 1
+
+    SeP_RTS_OQ_5828Test:
+      MarketingAuthorizationHolderName: "Baxter AS"
+      AttributeValue: "baxter_qa_aipwsuser"
+      NoOfDays : "300"
+
     UAERegressionTest:
-     productCode: "05413760476537"
-     shipmentNumber: "SHP/MP/48913/2020"
+      productCode: "05413760476537"
+      shipmentNumber: "SHP/MP/48913/2020"
+
     BahrainRegressionTest:
-     productCode: "06285064000300"
-     caseCode: "50085412949319" 
+      productCode: "06285064000300"
+      caseCode: "50085412949319"
+
     SharedCodeBhSaTest:
       productCode: "06285064000300"
       palletCode: "0085412-4"
+
     SharedCodeEuSaTest:
       productCode: "37332414107124"
       palletCode: "0085412-4"
+
     SaudiRegressionTestInternal:
       productCode: "06285064000300"
+
     SaudiRegressionTestImport:
       productCode: "06285064000300"
+
     SaudiRegressionTestExport:
       productCode: "06285064000300"
+
     SaudiNegativeTest:
       productCode: "06285064000300"
+
     koreanGoldenGateTest:
       productCode: "08806553002544"
       caseCode: "58806553002549"
+
     koreanGlobalScapeTest:
       productCode: "08806553002544"
       palletCode: "0085412-3"
+
     EuRegressionTest:
       productCode: "35413760481020"
       palletCode: "5413760-3"
       secondProductCode: "03400957557720"
+
     SwissLogUsTest:
       productCode: "00303389568018"
       palletCode: "5413760-3"
       caseCode: "50303380102049"
+
     SwissLogMultipleScenarioTest:
       productCode: "00303389568018"
       firstCase: "50303380102049"
@@ -97,11 +170,13 @@ DEV:
       sixthCase: "50303380102049"
       palletCodeForSeventh: "5413760-3"
       seventhCase: "50303380102049"
+
 UAT:
-  url: 
+  url:
   testUser: ADALAMR
   validPassword: 4144414c414d52
+
 TEST:
-  url: 
+  url:
   testUser: ADALAMR
   validPassword1: 584142746572
