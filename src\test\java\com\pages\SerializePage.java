@@ -36,16 +36,16 @@ public class SerializePage extends BasePage {
 	private static final int SHORT_WAIT_TIMEOUT = 20;
 	private static final int LONG_WAIT_TIMEOUT = 40;
 	private static final int LONG_POLL_INTERVAL = 4;
-	
+
 	// Sleep durations (in milliseconds)
 	private static final int LONG_SLEEP_MS = 15000;
 	private static final int MEDIUM_SLEEP_MS = 10000;
-	
+
 	// Site IDs
 	private static final String SITE_ID_DEFAULT = "22798";
 	private static final String SITE_ID_EU_REGRESSION = "122387";
 	private static final String SITE_ID_SWL_DEV04 = "122392";
-	
+
 	// Product Codes
 	private String PRODUCT_CODE_DEFAULT = td.getTestData(BaseTest.environment, "palletCode");
 	private static final String PRODUCT_CODE_SWISSLOG_TEST = "0085412-3";
@@ -55,7 +55,7 @@ public class SerializePage extends BasePage {
 	private static final String PRODUCT_CODE_SWISSLOG_CASE = "50303380102049";
 	private static final String PRODUCT_CODE_EU_PALLET = "5413760-3";
 	private static final String PRODUCT_CODE_SWL_DEV04_CASE = "50303380116206";
-	
+
 	// Lot Number Prefixes
 	private static final String LOT_PREFIX_UAE = "UAE";
 	private static final String LOT_PREFIX_BAHRAIN = "BAH";
@@ -66,7 +66,7 @@ public class SerializePage extends BasePage {
 	private static final String LOT_PREFIX_EU = "EUR";
 	private static final String LOT_PREFIX_EU_SA = "EUSA";
 	private static final String LOT_PREFIX_BH_SA = "BHSA";
-	
+
 	// XML File Names - Aggregation
 	private static final String XML_UAE = "UAE070725.xml";
 	private static final String XML_BAHRAIN_COMM_AGG = "BAHQA1_Comm_Agg.xml";
@@ -80,7 +80,7 @@ public class SerializePage extends BasePage {
 	private static final String XML_EU_COMM_AGG = "EURTCommissionAggregate.xml";
 	private static final String XML_SHARED_EU_SA = "SharedCode_EUSAQA1.xml";
 	private static final String XML_SHARED_BH_SA = "BAHSAQA2_Comm_Agg.xml";
-	
+
 	// XML File Names - Shipment
 	private static final String XML_UAE_SHIPMENT = "UAE070725-Shipment.xml";
 	private static final String XML_BAHRAIN_SHIP = "Bahrain_Ship.xml";
@@ -97,7 +97,7 @@ public class SerializePage extends BasePage {
 	private static final String XML_SHARED_BH_SA_SHIP3 = "SharedCode_Bahrain_SA_Ship3.xml";
 	private static final String XML_SHARED_BH_SA_SHIP4 = "SharedCode_Bahrain_SA_Ship4.xml";
 	private static final String XML_EVENT_TIME_SHIPPING = "5829ETT_Shipping_Testing.xml";
-	
+
 	// XML Tag Names
 	private static final String TAG_EVENT_TIME = "eventTime";
 	private static final String TAG_EPC = "epc";
@@ -107,7 +107,7 @@ public class SerializePage extends BasePage {
 	private static final String TAG_BIZ_TRANSACTION = "bizTransaction";
 	private static final String TAG_DESTINATION = "destination";
 	private static final String TAG_SOURCE = "source";
-	
+
 	// ==================== INSTANCE VARIABLES ====================
 
 	public String lotNumber;
@@ -142,7 +142,7 @@ public class SerializePage extends BasePage {
 	}
 
 	// ==================== HELPER METHODS ====================
-	
+
 	/**
 	 * Constructs the full path to a resource file in the test resources directory.
 	 * @param fileName The name of the file
@@ -151,7 +151,7 @@ public class SerializePage extends BasePage {
 	private String getResourcePath(String fileName) {
 		return Paths.get(System.getProperty("user.dir"), "src", "test", "resources", fileName).toString();
 	}
-	
+
 	/**
 	 * Sleeps for the specified duration, handling InterruptedException.
 	 * @param milliseconds The duration to sleep in milliseconds
@@ -164,7 +164,7 @@ public class SerializePage extends BasePage {
 			Thread.currentThread().interrupt();
 		}
 	}
-	
+
 	/**
 	 * Generates a lot number with the specified prefix and random digits.
 	 * @param prefix The prefix for the lot number
@@ -174,7 +174,7 @@ public class SerializePage extends BasePage {
 	private String generateLotNumber(String prefix, int digits) {
 		return prefix + RandomStringUtils.randomNumeric(digits);
 	}
-	
+
 	/**
 	 * Switches to body frame and waits for an element.
 	 * @param element The element to wait for
@@ -186,7 +186,7 @@ public class SerializePage extends BasePage {
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), element, timeout, pollInterval);
 	}
-	
+
 	/**
 	 * Enters product code and selects from dropdown.
 	 * @param pCode The product code to enter
@@ -198,7 +198,7 @@ public class SerializePage extends BasePage {
 		sleepSafely(3000);
 		click(Select_ProductDropdown_Opt1, "Selecting product from dropdown");
 	}
-	
+
 	/**
 	 * Clicks allocate button and fetches serial numbers into specified array.
 	 * @param targetArray The array to store serial numbers
@@ -245,7 +245,6 @@ public class SerializePage extends BasePage {
 	@FindBy(xpath = "//input[@name='prodCode1']")
 	WebElement xCode;
 	@FindBy(xpath = "(//div[@id='ajax_listOfOptions']//div[@class='optionDivSelected'])[1]")
-	// @FindBy(xpath = "//div[@id='1688662827657216']")
 	WebElement Select_ProductDropdown_Opt1;
 	@FindBy(xpath = "//a[@id='btnClear']")
 	WebElement Clear_allocateSerialdata;
@@ -348,7 +347,6 @@ public class SerializePage extends BasePage {
 		try {
 			Thread.sleep(15000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String newTime = getFixedTimestamp();
@@ -366,7 +364,6 @@ public class SerializePage extends BasePage {
 		try {
 			Thread.sleep(15000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String time1 = getFixedTimestamp();
@@ -429,7 +426,6 @@ public class SerializePage extends BasePage {
 			WebElement el = getDriver()
 					.findElement(By.xpath("//div[@id='divScrollable']/table/tbody/tr[" + (i + 1) + "]/td[1]"));
 			caseBahrain[i - 1] = el.getText();
-
 		}
 		getDriver().switchTo().defaultContent();
 	}
@@ -442,7 +438,7 @@ public class SerializePage extends BasePage {
 			if (i < 6) sleepSafely(LONG_SLEEP_MS);
 		}
 		updateTagWithValues(filePath, TAG_EVENT_TIME, timestamps);
-		
+
 		List<String> epcData = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
 			epcData.add(abc[i]);
@@ -460,7 +456,7 @@ public class SerializePage extends BasePage {
 			epcData.add(caseBahrain[i]);
 		}
 		updateTagWithValues(filePath, TAG_EPC, epcData);
-		
+
 		List<String> parentData = new ArrayList<>();
 		for (int i = 0; i < 2; i++) {
 			parentData.add(caseBahrain[i]);
@@ -469,7 +465,7 @@ public class SerializePage extends BasePage {
 			parentData.add(palletBahrain[i]);
 		}
 		updateTagWithValues(filePath, TAG_PARENT_ID, parentData);
-		
+
 		lotNumber = generateLotNumber(LOT_PREFIX_BAHRAIN, 6);
 		List<String> lotNum = Arrays.asList(lotNumber, lotNumber, lotNumber);
 		updateTagWithValues(filePath, TAG_LOT_NUMBER_CBVMDA, lotNum);
@@ -527,7 +523,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(15000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -588,7 +583,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(15000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -649,7 +643,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(15000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -681,7 +674,6 @@ public class SerializePage extends BasePage {
 		try {
 			Thread.sleep(15000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String time = getFixedTimestamp();
@@ -728,7 +720,6 @@ public class SerializePage extends BasePage {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
-		
 		sendKeys(productCode, data, "Case Number entering in serialization tab for Korea GG");
 		WebElement ele = getDriver().findElement(By.xpath("//div[contains(text(),'"+data+"_"+data+"')]"));
 		waitForElementToBeDisplayed(getDriver(), ele, 20, 3);
@@ -742,7 +733,6 @@ public class SerializePage extends BasePage {
 			WebElement el = getDriver()
 					.findElement(By.xpath("//div[@id='divScrollable']/table/tbody/tr[" + (i + 1) + "]/td[1]"));
 			caseBahrain[i - 1] = el.getText();
-
 		}
 		getDriver().switchTo().defaultContent();
 	}
@@ -782,7 +772,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(15000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -800,7 +789,6 @@ public class SerializePage extends BasePage {
 		try {
 			Thread.sleep(15000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String time = getFixedTimestamp();
@@ -829,7 +817,6 @@ public class SerializePage extends BasePage {
 			WebElement el = getDriver()
 					.findElement(By.xpath("//div[@id='divScrollable']/table/tbody/tr[" + (i + 1) + "]/td[1]"));
 			palletBahrain[i - 1] = el.getText();
-
 		}
 		getDriver().switchTo().defaultContent();
 	}
@@ -869,7 +856,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(15000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -887,7 +873,6 @@ public class SerializePage extends BasePage {
 		try {
 			Thread.sleep(15000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String time = getFixedTimestamp();
@@ -930,7 +915,7 @@ public class SerializePage extends BasePage {
 		return lp;
 	}
 
-	public void enterCaseInformationForSwissLog(String message,String secondCase, int count) {
+	public void enterCaseInformationForSwissLog(String message, String secondCase, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -943,7 +928,7 @@ public class SerializePage extends BasePage {
 		sendKeys(serialNumber, Integer.toString(count), "Enter count for case in Swiss log test");
 		click(allocateButton, message);
 		if (count > caseBahrain.length) {
-			caseBahrain = new String[count]; // Create new array with required size
+			caseBahrain = new String[count];
 		}
 		waitForElementToBeDisplayed(getDriver(), excelIcon, 30, 3);
 		for (int i = 1; i <= count; i++) {
@@ -982,7 +967,6 @@ public class SerializePage extends BasePage {
 		for (int i = 0; i < 2; i++) {
 			parentData.add(palletBahrain[i]);
 		}
-
 		updateTagWithValues(filePath, "parentID", parentData);
 		Long n = randomNumber(6);
 		String text = "SWL" + Long.toString(n);
@@ -1000,7 +984,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(15000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -1043,10 +1026,10 @@ public class SerializePage extends BasePage {
 		waitForElementToBeDisplayed(getDriver(), excelIcon, 30, 3);
 		Assert.assertTrue(excelIcon.isDisplayed(), "After clicking on allocation excel files are not generated");
 		if (count > abc.length) {
-			abc = new String[count]; // Create new array with required size
+			abc = new String[count];
 		}
 		if (count < abc.length) {
-			abc = new String[count]; // Create new array with required size
+			abc = new String[count];
 		}
 		for (int i = 1; i <= count; i++) {
 			WebElement ele = getDriver()
@@ -1063,10 +1046,10 @@ public class SerializePage extends BasePage {
 		waitForElementToBeDisplayed(getDriver(), excelIcon, 30, 3);
 		Assert.assertTrue(excelIcon.isDisplayed(), "After clicking on allocation excel files are not generated");
 		if (count > palletBahrain.length) {
-			palletBahrain = new String[count]; // Create new array with required size
+			palletBahrain = new String[count];
 		}
 		if (count < palletBahrain.length) {
-			palletBahrain = new String[count]; // Create new array with required size
+			palletBahrain = new String[count];
 		}
 		for (int i = 1; i <= count; i++) {
 			WebElement ele = getDriver()
@@ -1081,7 +1064,6 @@ public class SerializePage extends BasePage {
 				+ File.separator + "resources" + File.separator + "EURTCommissionAggregate.xml";
 
 		List<String> epcData = new ArrayList<>();
-
 		for (int i = 0; i < 100; i++) {
 			epcData.add(abc[i]);
 		}
@@ -1091,21 +1073,17 @@ public class SerializePage extends BasePage {
 		for (int i = 0; i < 9; i++) {
 			epcData.add(palletBahrain[i]);
 		}
-
 		for (int i = 0; i < 100; i++) {
 			epcData.add(abc[i]);
 		}
-
 		for (int i = 0; i < 80; i++) {
 			epcData.add(def[i]);
 		}
-
 		updateTagWithValues(filePath, "epc", epcData);
 		List<String> parentData = new ArrayList<>();
 		for (int i = 0; i < 9; i++) {
 			parentData.add(palletBahrain[i]);
 		}
-
 		updateTagWithValues(filePath, "parentID", parentData);
 		Long n = randomNumber(6);
 		String text = "EUR" + Long.toString(n);
@@ -1122,7 +1100,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -1158,10 +1135,10 @@ public class SerializePage extends BasePage {
 		waitForElementToBeDisplayed(getDriver(), excelIcon, 30, 3);
 		Assert.assertTrue(excelIcon.isDisplayed(), "After clicking on allocation excel files are not generated");
 		if (count > def.length) {
-			def = new String[count]; // Create new array with required size
+			def = new String[count];
 		}
 		if (count < def.length) {
-			def = new String[count]; // Create new array with required size
+			def = new String[count];
 		}
 		for (int i = 1; i <= count; i++) {
 			WebElement ele = getDriver()
@@ -1169,7 +1146,6 @@ public class SerializePage extends BasePage {
 			def[i - 1] = ele.getText();
 		}
 		getDriver().switchTo().defaultContent();
-
 	}
 
 	public LoginPage clickAllocateButtonForEuRegression(String message, int count) {
@@ -1177,10 +1153,10 @@ public class SerializePage extends BasePage {
 		waitForElementToBeDisplayed(getDriver(), excelIcon, 30, 3);
 		Assert.assertTrue(excelIcon.isDisplayed(), "After clicking on allocation excel files are not generated");
 		if (count > abc.length) {
-			abc = new String[count]; // Create new array with required size
+			abc = new String[count];
 		}
 		if (count < abc.length) {
-			abc = new String[count]; // Create new array with required size
+			abc = new String[count];
 		}
 		for (int i = 1; i <= count; i++) {
 			WebElement ele = getDriver()
@@ -1202,11 +1178,9 @@ public class SerializePage extends BasePage {
 		for (int i = 0; i < 5; i++) {
 			euSerialNumber[i] = def[j + i];
 		}
-
 		for (int i = 5; i < 10; i++) {
 			euSerialNumber[i] = def[i];
 		}
-
 		for (int i = 10; i < 15; i++) {
 			euSerialNumber[i] = abc[i];
 		}
@@ -1235,7 +1209,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -1264,7 +1237,6 @@ public class SerializePage extends BasePage {
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String time = getFixedTimestamp();
@@ -1273,7 +1245,6 @@ public class SerializePage extends BasePage {
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		updateTagWithValues(filePath, "eventTime", a);
@@ -1291,10 +1262,10 @@ public class SerializePage extends BasePage {
 		waitForElementToBeDisplayed(getDriver(), excelIcon, 30, 3);
 		Assert.assertTrue(excelIcon.isDisplayed(), "After clicking on allocation excel files are not generated");
 		if (count > abc.length) {
-			abc = new String[count]; // Create new array with required size
+			abc = new String[count];
 		}
 		if (count < abc.length) {
-			abc = new String[count]; // Create new array with required size
+			abc = new String[count];
 		}
 		for (int i = 1; i <= count; i++) {
 			WebElement ele = getDriver()
@@ -1390,7 +1361,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -1433,7 +1403,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -1449,7 +1418,7 @@ public class SerializePage extends BasePage {
 		return lp;
 	}
 
-	public void enterCaseNumberForSwissLogMultipleScenarioTestDevThree(String message, String caseCode,int count) {
+	public void enterCaseNumberForSwissLogMultipleScenarioTestDevThree(String message, String caseCode, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -1474,7 +1443,6 @@ public class SerializePage extends BasePage {
 		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
 				+ File.separator + "resources" + File.separator + "SWLDEV03.XML";
 		List<String> epcData = new ArrayList<>();
-
 		for (int i = 0; i < 2; i++) {
 			epcData.add(caseSwissThree[i]);
 		}
@@ -1493,7 +1461,7 @@ public class SerializePage extends BasePage {
 		return lp;
 	}
 
-	public void enterPalletNumberForSwissLogMultipleScenarioTestForDevThree(String message,String pCode, int count) {
+	public void enterPalletNumberForSwissLogMultipleScenarioTestForDevThree(String message, String pCode, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -1536,7 +1504,6 @@ public class SerializePage extends BasePage {
 		for (int i = 0; i < 1; i++) {
 			parentData.add(palletBahrain[i]);
 		}
-
 		updateTagWithValues(filePath, "parentID", epcData);
 
 		List<String> timeSt = new ArrayList<>();
@@ -1546,7 +1513,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -1557,7 +1523,7 @@ public class SerializePage extends BasePage {
 		return lp;
 	}
 
-	public void enterPalletNumberForSwissLogMultipleScenarioTestForSwlDev04(String message,String pCode, int count) {
+	public void enterPalletNumberForSwissLogMultipleScenarioTestForSwlDev04(String message, String pCode, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -1578,7 +1544,7 @@ public class SerializePage extends BasePage {
 		getDriver().switchTo().defaultContent();
 	}
 
-	public void enterCaseInformationForSwlDev04(String message,String caseCode, int count) {
+	public void enterCaseInformationForSwlDev04(String message, String caseCode, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -1627,7 +1593,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -1646,20 +1611,15 @@ public class SerializePage extends BasePage {
 	// KAZ
 
 	public void EnterPIDAandAllocate(String KAZPID, String SiteCode, String quantity) {
-		// sendKeys(pCode, KAZPID, "Enter product code to search & allocate");
-		// String parentWindow1 = getDriver().getWindowHandle();
 		sendKeys(xCode, KAZPID, "Entered Pallet code ");
 		click(Select_ProductDropdown_Opt1, "Allocate product");
 		String SiteCodexpath = "//option[@value='" + SiteCode + "']";
 		WebElement SiteID = getDriver().findElement(By.xpath(SiteCodexpath));
-
 		click(xSiteId, "Click site id");
 		click(SiteID, "Select Baxter Halle");
 		xSerialNumber.clear();
 		sendKeys(xSerialNumber, quantity, "Entered '" + quantity + "' as serial  number ");
-		click(allocateButton, "Allocate product"); //if product ready in dev env
-		//click(PreviewButton, "preview Allocate product");
-
+		click(allocateButton, "Allocate product");
 		if (Capture_sgtinSnumber.isDisplayed()) {
 			System.out.println(" SGTIN generated ");
 		} else {
@@ -1668,7 +1628,6 @@ public class SerializePage extends BasePage {
 	}
 
 	public String GetSerialNumber(String GetSerialNumber) {
-
 		WebElement SerialNumber = getDriver()
 				.findElement(By.xpath("//table/tbody/tr[2]/td[@class='body_text' and starts-with(text(), 'urn')]"));
 		String sgtin_Snumber = SerialNumber.getText();
@@ -1716,30 +1675,45 @@ public class SerializePage extends BasePage {
 		JavaScriptExecutorUtil.waitUntilJavaScriptCompletes(getDriver());
 	}
 
+	// ==================== SOFT DELETE METHODS ====================
+
 	public void updateAggregrateXmlForSoftDelete(String activeCustomer) {
+
 		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "SDT5829_Test.xml";
+				+ File.separator + "resources" + File.separator
+				+ (String) td.getTestDataByPath(BaseTest.environment,
+						"TestCase.SeP_RTS_OQ_SoftDeleteTest.AggregateXmlFile");
+
+		// Read counts from YAML
+		int productCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_SoftDeleteTest.SerializeConfig.ProductCount");
+		int caseCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_SoftDeleteTest.SerializeConfig.CaseCount");
+		int palletCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_SoftDeleteTest.SerializeConfig.PalletCount");
+		int lotNumberTagCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_SoftDeleteTest.AggregateXml.LotNumberTagCount");
+		int destinationCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_SoftDeleteTest.AggregateXml.DestinationCount");
 
 		/**
-		 * Update time stamp for the XML Here there are 6 time stamps used below unique
-		 * 3 time events noOfAddActionObjectEvent = 3; noOfAddActionAggregationEvent =
-		 * 2; noOfObservationActionObjectEvent=1;
+		 * Update timestamps
+		 * Unique timestamp groups are derived from the pallet→case→product hierarchy:
+		 *   time[0] → noOfAddActionObjectEvent   = number of distinct serial levels (product + case + pallet)
+		 *   time[1] → noOfAddActionAggregationEvent = caseCount + palletCount  (products→cases, cases→pallets)
+		 *   time[2] → noOfObservationActionObjectEvent = palletCount
 		 **/
+		int noOfAddActionObjectEvent = 3; // one commissioning ObjectEvent per serial level (product, case, pallet)
+		int noOfAddActionAggregationEvent = caseCount + palletCount;
+		int noOfObservationActionObjectEvent = palletCount;
+
 		String[] time = new String[3];
 		List<String> eventTimeList = new ArrayList<>();
 
 		for (int i = 0; i < time.length; i++) {
 			time[i] = getFixedTimestamp();
-			try {
-				Thread.sleep(15000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sleepSafely(LONG_SLEEP_MS);
 		}
-		int noOfAddActionObjectEvent = 3;
-		int noOfAddActionAggregationEvent = 2;
-		int noOfObservationActionObjectEvent = 1;
 		for (int i = 0; i < noOfAddActionObjectEvent; i++) {
 			eventTimeList.add(time[0]);
 		}
@@ -1749,104 +1723,104 @@ public class SerializePage extends BasePage {
 		for (int i = 0; i < noOfObservationActionObjectEvent; i++) {
 			eventTimeList.add(time[2]);
 		}
-		updateTagWithValues(filePath, "eventTime", eventTimeList);
+		updateTagWithValues(filePath, TAG_EVENT_TIME, eventTimeList);
 		eventTimeList.stream().forEach(System.out::println);
 
 		/**
-		 * Update product information products - 2 Case - 1 Pallet - 1
+		 * Update EPC data following pallet→case→product hierarchy:
+		 * ObjectEvents  : products, cases, pallets (commissioning)
+		 * AggregationEvents: products→cases (childEPCs), cases→pallets (childEPCs)
+		 * ObservationEvent : pallet (shipping)
 		 **/
-		// ObjectEvenet
 		List<String> epcData = new ArrayList<>();
-		for (int i = 0; i < 2; i++) {
+		// Commissioning ObjectEvents
+		for (int i = 0; i < productCount; i++) {
 			epcData.add(products[i]);
 		}
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < caseCount; i++) {
 			epcData.add(cases[i]);
 		}
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < palletCount; i++) {
 			epcData.add(pallets[i]);
 		}
-
-		// AggregationEvent
-
-		for (int i = 0; i < 2; i++) {
+		// AggregationEvent: products packed into cases
+		for (int i = 0; i < productCount; i++) {
 			epcData.add(products[i]);
 		}
-		for (int i = 0; i < 1; i++) {
+		// AggregationEvent: cases packed into pallets
+		for (int i = 0; i < caseCount; i++) {
 			epcData.add(cases[i]);
 		}
-
-		// ObservationObjectEvent
-		for (int i = 0; i < 1; i++) {
+		// ObservationEvent: pallet shipped
+		for (int i = 0; i < palletCount; i++) {
 			epcData.add(pallets[i]);
 		}
-		updateTagWithValues(filePath, "epc", epcData);
+		updateTagWithValues(filePath, TAG_EPC, epcData);
 		epcData.stream().forEach(System.out::println);
 
-		/** update parent data **/
+		/** Update parentID: cases are parents for products, pallets are parents for cases **/
 		List<String> parentData = new ArrayList<>();
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < caseCount; i++) {
 			parentData.add(cases[i]);
 		}
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < palletCount; i++) {
 			parentData.add(pallets[i]);
 		}
-		updateTagWithValues(filePath, "parentID", parentData);
+		updateTagWithValues(filePath, TAG_PARENT_ID, parentData);
 		parentData.stream().forEach(System.out::println);
-		/**
-		 * update Lot Number lot number tag for Soft Delete is used as
-		 * "gs1ushc:lotNumber"
-		 **/
 
+		/** Update lot number **/
 		Long n = randomNumber(6);
 		String text = "5829SDT" + Long.toString(n);
 		this.lotNumber = text;
 		List<String> lotNum = new ArrayList<>();
-		lotNum.add(text);
-		lotNum.add(text);
-		lotNum.add(text);
-		updateTagWithValues(filePath, "gs1ushc:lotNumber", lotNum);
+		for (int i = 0; i < lotNumberTagCount; i++) {
+			lotNum.add(text);
+		}
+		updateTagWithValues(filePath, TAG_LOT_NUMBER_GS1, lotNum);
 		lotNum.stream().forEach(System.out::println);
+
 		/** Update bizTransaction **/
 		List<String> bizTransaction = new ArrayList<>();
 		bizTransaction.add("TO-" + this.lotNumber);
 		bizTransaction.add("SN-" + this.lotNumber);
 		bizTransaction.add("PO-" + this.lotNumber);
 		bizTransaction.add("NA");
-		updateTagWithValues(filePath, "bizTransaction", bizTransaction);
+		updateTagWithValues(filePath, TAG_BIZ_TRANSACTION, bizTransaction);
 		bizTransaction.stream().forEach(System.out::println);
-		/**
-		 * Update destination owning_party and location
-		 **/
+
+		/** Update destination owning_party and location **/
 		List<String> destination = new ArrayList<>();
-		destination.add(activeCustomer);
-		destination.add(activeCustomer);
-		updateTagWithValues(filePath, "destination", destination);
+		for (int i = 0; i < destinationCount; i++) {
+			destination.add(activeCustomer);
+		}
+		updateTagWithValues(filePath, TAG_DESTINATION, destination);
 		destination.stream().forEach(System.out::println);
 	}
 
 	public void updateShippingXmlForSoftDelete(String customerDeleted) {
 
 		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "SDT5827_ShippingTest.xml";
+				+ File.separator + "resources" + File.separator
+				+ (String) td.getTestDataByPath(BaseTest.environment,
+						"TestCase.SeP_RTS_OQ_SoftDeleteTest.ShippingXmlFile");
 
-		/**
-		 * Update time stamp for the XML
-		 **/
+		// Read counts from YAML
+		int palletCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_SoftDeleteTest.SerializeConfig.PalletCount");
+
+		/** Update timestamp **/
 		List<String> eventTimeList = new ArrayList<>();
 		eventTimeList.add(getFixedTimestamp());
-		updateTagWithValues(filePath, "eventTime", eventTimeList);
+		updateTagWithValues(filePath, TAG_EVENT_TIME, eventTimeList);
 		eventTimeList.stream().forEach(System.out::println);
 
-		/**
-		 * Update product information Pallet - 1
-		 **/
-		// ObjectEvenet
+		/** Update EPC — pallet(s) being shipped **/
 		List<String> epcData = new ArrayList<>();
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < palletCount; i++) {
 			epcData.add(pallets[i]);
 		}
-		updateTagWithValues(filePath, "epc", epcData);
+		updateTagWithValues(filePath, TAG_EPC, epcData);
 		epcData.stream().forEach(System.out::println);
 
 		/** Update bizTransaction **/
@@ -1854,331 +1828,60 @@ public class SerializePage extends BasePage {
 		bizTransaction.add("TO-" + this.lotNumber);
 		bizTransaction.add("SN-" + this.lotNumber);
 		bizTransaction.add("PO-" + this.lotNumber);
-		updateTagWithValues(filePath, "bizTransaction", bizTransaction);
+		updateTagWithValues(filePath, TAG_BIZ_TRANSACTION, bizTransaction);
 		bizTransaction.stream().forEach(System.out::println);
-		/**
-		 * Update destination gs1ushc:transferredToId and gs1ushc:shipToLocationId
-		 **/
+
+		/** Update transferredToId and shipToLocationId with deleted customer **/
 		List<String> transferredTo = new ArrayList<>();
 		transferredTo.add(customerDeleted);
 		updateTagWithValues(filePath, "gs1ushc:transferredToId", transferredTo);
 		transferredTo.stream().forEach(System.out::println);
+
 		List<String> shipToLocation = new ArrayList<>();
 		shipToLocation.add(customerDeleted);
 		updateTagWithValues(filePath, "gs1ushc:shipToLocationId", shipToLocation);
 		shipToLocation.stream().forEach(System.out::println);
-
 	}
 
-	public void enterProductCode(String message, String pCode) throws Exception {
-		waitForElementToBeDisplayed(getDriver(), productCode, 40, 4);
-		sendKeys(productCode, pCode, message);
-		WebElement ele = getDriver().findElement(By.xpath("//div[contains(text(),'" + pCode + "_" + pCode + "')]"));
-		waitForElementToBeDisplayed(getDriver(), ele, 20, 3);
-		click(ele, message + "selecting unit");
-		JavaScriptExecutorUtil.waitUntilJavaScriptCompletesByDuration(getDriver(), 10);
-		Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver()).withTimeout(Duration.ofSeconds(30))
-				.pollingEvery(Duration.ofSeconds(5)).ignoring(Exception.class);
-		ExpectedCondition<Boolean> productCodeLoaded = new ExpectedCondition<Boolean>() {
-			@Override
-			public Boolean apply(WebDriver driver) {
-				List<WebElement> procuctCode = getDriver()
-						.findElements(By.xpath("//div[@id='ajax_listOfOptions']/div"));
-
-				return procuctCode.size() > 0;
-			}
-		};
-		wait.until(productCodeLoaded);
-		Thread.sleep(2000);
-	}
-
-	public void selectSiteId(String siteName) throws Exception {
-		waitForElementToBeDisplayed(getDriver(), siteId, 30, 3);
-		selectElementFromDropDownByVisibleText(siteId, siteName);
-		JavaScriptExecutorUtil.waitUntilJavaScriptCompletesByDuration(getDriver(), 10);
-	}
-
-	public void updateAggregrateXmlForShipmentNegativeTest() {
-		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "5829STNA.xml";
-
-		/**
-		 * Update time stamp for the XML Here there are 6 time stamps used below unique
-		 * 3 time events noOfAddActionObjectEvent = 3; noOfAddActionAggregationEvent =
-		 * 2; noOfObservationActionObjectEvent=1;
-		 **/
-		String[] time = new String[4];
-		List<String> eventTimeList = new ArrayList<>();
-
-		for (int i = 0; i < time.length; i++) {
-			time[i] = getFixedTimestamp();
-			try {
-				Thread.sleep(15000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		int noOfAddActionObjectEvent = 2;
-		int noOfAddActionAggregationEvent1 = 1;
-		int noOfAddActionAggregationEvent2 = 1;
-		int noOfObservationActionObjectEvent = 1;
-		for (int i = 0; i < noOfAddActionObjectEvent; i++) {
-			eventTimeList.add(time[0]);
-		}
-		for (int i = 0; i < noOfAddActionAggregationEvent1; i++) {
-			eventTimeList.add(time[1]);
-		}
-		for (int i = 0; i < noOfAddActionAggregationEvent2; i++) {
-			eventTimeList.add(time[2]);
-		}
-		for (int i = 0; i < noOfObservationActionObjectEvent; i++) {
-			eventTimeList.add(time[3]);
-		}
-		updateTagWithValues(filePath, "eventTime", eventTimeList);
-		eventTimeList.stream().forEach(System.out::println);
-
-		/**
-		 * Update product information products - 1 Case - 1 Pallet - 1
-		 **/
-		// ObjectEvenet
-		List<String> epcData = new ArrayList<>();
-		for (int i = 0; i < 1; i++) {
-			epcData.add(products[i]);
-		}
-		for (int i = 0; i < 1; i++) {
-			epcData.add(cases[i]);
-		}
-
-		for (int i = 0; i < 1; i++) {
-			epcData.add(products[i]);
-		}
-		for (int i = 0; i < 1; i++) {
-			epcData.add(pallets[i]);
-		}
-
-		for (int i = 0; i < 1; i++) {
-			epcData.add(cases[i]);
-		}
-
-		updateTagWithValues(filePath, "epc", epcData);
-		epcData.stream().forEach(System.out::println);
-
-		/** update parent data **/
-		List<String> parentData = new ArrayList<>();
-		for (int i = 0; i < 1; i++) {
-			parentData.add(cases[i]);
-		}
-		for (int i = 0; i < 1; i++) {
-			parentData.add(pallets[i]);
-		}
-		updateTagWithValues(filePath, "parentID", parentData);
-		parentData.stream().forEach(System.out::println);
-		/**
-		 * update Lot Number lot number tag is used as "<gs1ushc:lotNumber"
-		 **/
-
-		Long n = randomNumber(6);
-		String text = "5829STNA" + Long.toString(n);
-		this.lotNumber = text;
-		List<String> lotNum = new ArrayList<>();
-		lotNum.add(text);
-		lotNum.add(text);
-		lotNum.add(text);
-		updateTagWithValues(filePath, "gs1ushc:lotNumber", lotNum);
-		lotNum.stream().forEach(System.out::println);
-	}
-
-	public void updateShippingXmlForShipmentNegativeTest(String SenderOwner, String SenderCustodian,
-			String ReceiverOwner, String ReceiverCustodian) {
-		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "5829STNA_shipping.xml";
-
-		/**
-		 * Update time stamp for the XML
-		 **/
-		List<String> eventTimeList = new ArrayList<>();
-		eventTimeList.add(getFixedTimestamp());
-		updateTagWithValues(filePath, "eventTime", eventTimeList);
-		eventTimeList.stream().forEach(System.out::println);
-
-		/**
-		 * Update pallet information Pallet - 1
-		 **/
-		// ObjectEvenet
-		List<String> epcData = new ArrayList<>();
-		for (int i = 0; i < 1; i++) {
-			epcData.add(pallets[i]);
-		}
-		updateTagWithValues(filePath, "epc", epcData);
-		epcData.stream().forEach(System.out::println);
-
-		/** update parent data **/
-		List<String> senderCustodianID = new ArrayList<>();
-		for (int i = 0; i < 2; i++) {
-			senderCustodianID.add(SenderCustodian);
-		}
-		updateTagWithValues(filePath, "id", senderCustodianID);
-		senderCustodianID.stream().forEach(System.out::println);
-
-		List<String> source = new ArrayList<>();
-		source.add(SenderOwner);
-		source.add(SenderCustodian);
-		updateTagWithValues(filePath, "source", source);
-		source.stream().forEach(System.out::println);
-
-		List<String> destination = new ArrayList<>();
-		destination.add(ReceiverOwner);
-		destination.add(ReceiverCustodian);
-		updateTagWithValues(filePath, "destination", destination);
-		destination.stream().forEach(System.out::println);
-
-	}
-	
-	public void updateSecondShipmentXmlForSharedEuSaTest() {
-		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "SharedCode_NonSAU_Ship2.xml";
-		
-		List<String> epcData = new ArrayList<>();
-		epcData.add(palletBahrain[1]);
-		epcData.add(palletBahrain[2]);
-		updateTagWithValues(filePath, "epc", epcData);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String time = getFixedTimestamp();
-		List<String> a = new ArrayList<>();
-		a.add(time);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		updateTagWithValues(filePath, "eventTime", a);
-		
-		List<String> lotNum = new ArrayList<>();
-		lotNum.add(lotNumber);
-		lotNum.add("08132025");
-		lotNum.add(lotNumber);
-		lotNum.add("20250813QA");
-		updateTagWithValues(filePath, "bizTransaction", lotNum);
-	}
-	
-	public void updateAggregrateXmlForSharedBhSaTest() {
-		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "BAHSAQA2_Comm_Agg.xml";
-
-		List<String> epcData = new ArrayList<>();
-		for (int i = 0; i < 4; i++) {
-			epcData.add(abc[i]);
-		}
-		for (int i = 0; i < 2; i++) {
-			epcData.add(palletBahrain[i]);
-		}
-		for (int i = 0; i < 4; i++) {
-			epcData.add(abc[i]);
-		}
-		updateTagWithValues(filePath, "epc", epcData);
-		String[] time = new String[4];
-		List<String> a = new ArrayList<>();
-		for (int i = 0; i < time.length; i++) {
-			time[i] = getFixedTimestamp();
-			a.add(time[i]);
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		updateTagWithValues(filePath, "eventTime", a);
-		Long n = randomNumber(4);
-		String text = "BHSA" + Long.toString(n);
-		lotNumber = text;
-		List<String> lotNum = new ArrayList<>();
-		lotNum.add(text);
-		lotNum.add(text);
-		updateTagWithValues(filePath, "cbvmda:lotNumber", lotNum);
-	}
-
-	public void updateFirstShipmentXmlForSharedBhSaTest() {
-		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "SharedCode_Bahrain_SA_Ship3.xml";
-
-		List<String> epcData = new ArrayList<>();
-		epcData.add(palletBahrain[0]);
-		updateTagWithValues(filePath, "epc", epcData);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String time = getFixedTimestamp();
-		List<String> a = new ArrayList<>();
-		a.add(time);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		updateTagWithValues(filePath, "eventTime", a);
-	}
-	
-	public void updateSecondShipmentXmlForSharedBhSaTest() {
-		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "SharedCode_Bahrain_SA_Ship4.xml";
-		
-		List<String> epcData = new ArrayList<>();
-		epcData.add(palletBahrain[1]);
-		updateTagWithValues(filePath, "epc", epcData);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String time = getFixedTimestamp();
-		List<String> a = new ArrayList<>();
-		a.add(time);
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		updateTagWithValues(filePath, "eventTime", a);
-	}
+	// ==================== EVENT TIME TEST METHODS ====================
 
 	public String updateAggregrateXmlForEventTimeTest() {
 
 		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "5829ETT_Testing.xml";
-		
-		/** Update time stamp for the XML
-		 * 2/5/1/1
-		**/
+				+ File.separator + "resources" + File.separator
+				+ (String) td.getTestDataByPath(BaseTest.environment,
+						"TestCase.SeP_RTS_OQ_EvetTime_Test.AggregateXmlFile");
+
+		// Read counts from YAML
+		int productCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_EvetTime_Test.ProductCount");
+		int caseCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_EvetTime_Test.CaseCount");
+		int palletCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_EvetTime_Test.PalletCount");
+		int lotNumberTagCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_EvetTime_Test.AggregateXml.LotNumberTagCount");
+
+		/**
+		 * Update timestamps
+		 * Unique timestamp groups derived from hierarchy:
+		 *   time[0] → noOfObjectEventProduct    = 2 (commissioning ObjectEvents for products — fixed structural count)
+		 *   time[1] → noOfAggregationEventCase  = caseCount (one aggregation event per case)
+		 *   time[2] → noOfObjectEventCase        = 1 (commissioning ObjectEvent for cases — fixed structural count)
+		 *   time[3] → noOfAggregationEventPallet = palletCount (one aggregation event per pallet)
+		 **/
+		int noOfObjectEventProduct = 2;
+		int noOfAggregationEventCase = caseCount;
+		int noOfObjectEventCase = 1;
+		int noOfAggregationEventPallet = palletCount;
+
 		String[] time = new String[4];
 		List<String> eventTimeList = new ArrayList<>();
-		
+
 		for (int i = 0; i < time.length; i++) {
 			time[i] = getFixedTimestamp();
-			try {
-				Thread.sleep(15000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sleepSafely(LONG_SLEEP_MS);
 		}
-		int noOfObjectEventProduct = 2;
-		int noOfAggregationEventCase = 5;
-		int noOfObjectEventCase=1;
-		int noOfAggregationEventPallet=1;
 		for (int i = 0; i < noOfObjectEventProduct; i++) {
 			eventTimeList.add(time[0]);
 		}
@@ -2191,201 +1894,179 @@ public class SerializePage extends BasePage {
 		for (int i = 0; i < noOfAggregationEventPallet; i++) {
 			eventTimeList.add(time[3]);
 		}
-		updateTagWithValues(filePath, "eventTime", eventTimeList);
+		updateTagWithValues(filePath, TAG_EVENT_TIME, eventTimeList);
 		eventTimeList.stream().forEach(System.out::println);
-		
-		/** 
-		 * Update product information
-		 * products - 2
-		 * Case - 1
-		 * Pallet - 1
-		 * **/
-		//ObjectEvenet
+
+		/**
+		 * Update EPC data following pallet→case→product hierarchy:
+		 * ObjectEvent (commission products): productCount products
+		 * AggregationEvents (products→cases): productCount products, caseCount cases
+		 * ObjectEvent (commission pallet): palletCount pallets
+		 * AggregationEvent (cases→pallets): caseCount cases
+		 **/
 		List<String> epcData = new ArrayList<>();
-		// 10 product
-		for (int i = 0; i < 10; i++) {
+		// Commission products ObjectEvent
+		for (int i = 0; i < productCount; i++) {
 			epcData.add(products[i]);
 		}
-		// 5 cases
-		for (int i = 0; i < 5; i++) {
+		// Commission cases ObjectEvent
+		for (int i = 0; i < caseCount; i++) {
 			epcData.add(cases[i]);
 		}
-		
-		//1 case -> 2 product
-		
-		for (int i = 0; i < 10; i++) {
+		// AggregationEvents: products packed into cases
+		for (int i = 0; i < productCount; i++) {
 			epcData.add(products[i]);
 		}
-		
-		
-		//Pallets -> Case
-		
-		for (int i = 0; i < 1; i++) {
+		// Commission pallet ObjectEvent
+		for (int i = 0; i < palletCount; i++) {
 			epcData.add(pallets[i]);
 		}
-		
-		for (int i = 0; i < 5; i++) {
+		// AggregationEvent: cases packed into pallets
+		for (int i = 0; i < caseCount; i++) {
 			epcData.add(cases[i]);
 		}
-		
-		
-		
-		updateTagWithValues(filePath, "epc", epcData);
+		updateTagWithValues(filePath, TAG_EPC, epcData);
 		epcData.stream().forEach(System.out::println);
-		
-		/** update parent data **/
+
+		/** Update parentID: cases are parents for products, pallets are parents for cases **/
 		List<String> parentData = new ArrayList<>();
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < caseCount; i++) {
 			parentData.add(cases[i]);
 		}
-		for (int i = 0; i < 1; i++) {
+		for (int i = 0; i < palletCount; i++) {
 			parentData.add(pallets[i]);
 		}
-		updateTagWithValues(filePath, "parentID", parentData);
+		updateTagWithValues(filePath, TAG_PARENT_ID, parentData);
 		parentData.stream().forEach(System.out::println);
-		/** update Lot Number 
-		 * lot number tag for Soft Delete is used as "gs1ushc:lotNumber"
-		 * **/
-		
+
+		/** Update lot number **/
 		Long n = randomNumber(6);
 		String text = "5829SDT" + Long.toString(n);
 		this.lotNumber = text;
 		List<String> lotNum = new ArrayList<>();
-		lotNum.add(text);
-		lotNum.add(text);
-		lotNum.add(text);
-		updateTagWithValues(filePath, "gs1ushc:lotNumber", lotNum);
+		for (int i = 0; i < lotNumberTagCount; i++) {
+			lotNum.add(text);
+		}
+		updateTagWithValues(filePath, TAG_LOT_NUMBER_GS1, lotNum);
 		lotNum.stream().forEach(System.out::println);
+
 		return this.lotNumber;
 	}
-	
-	
+
 	public void updateReworkAggregrateXmlForEventTimeTest() {
 
 		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
-				+ File.separator + "resources" + File.separator + "5829ETT_Rework_testing.xml";
-		
-		/** Update time stamp for the XML
-		 * 2/5/1/1
-		**/
+				+ File.separator + "resources" + File.separator
+				+ (String) td.getTestDataByPath(BaseTest.environment,
+						"TestCase.SeP_RTS_OQ_EvetTime_Test.ReworkXmlFile");
+
+		// Read rework-specific counts from YAML
+		int reworkCaseCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_EvetTime_Test.ReworkXml.ReworkCaseCount");
+		int reworkPalletCount = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_EvetTime_Test.ReworkXml.ReworkPalletCount");
+
+		/**
+		 * Update timestamps
+		 * 3 unique timestamp groups: disaggregate, rework commission, rework aggregate
+		 **/
 		String[] time = new String[3];
 		List<String> eventTimeList = new ArrayList<>();
-		
+
 		for (int i = 0; i < time.length; i++) {
 			time[i] = getFixedTimestamp();
-			try {
-				Thread.sleep(15000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			sleepSafely(LONG_SLEEP_MS);
 		}
 		eventTimeList.add(time[0]);
 		eventTimeList.add(time[1]);
 		eventTimeList.add(time[2]);
-		
-		updateTagWithValues(filePath, "eventTime", eventTimeList);
+		updateTagWithValues(filePath, TAG_EVENT_TIME, eventTimeList);
 		eventTimeList.stream().forEach(System.out::println);
-		
-		/** 
-		 * Update product information
-		 * de commission products - 4
-		 * Pallet - 1
-		 * **/
-		//ObjectEvenet
+
+		/**
+		 * Update EPC data:
+		 * Disaggregate reworkCaseCount cases from 1st pallet
+		 * Re-aggregate reworkCaseCount cases into 2nd pallet
+		 **/
 		List<String> epcData = new ArrayList<>();
-		// 4 cases
-		for (int i = 0; i < 4; i++) {
+		// Disaggregation: reworkCaseCount cases removed from 1st pallet
+		for (int i = 0; i < reworkCaseCount; i++) {
 			epcData.add(cases[i]);
 		}
-		// 1st pallet
-		
-		//2nd pallet -> 4 products
-		
-		for (int i = 1; i < 2; i++) {
+		// Re-aggregation: 2nd pallet + reworkCaseCount cases
+		for (int i = 1; i < reworkPalletCount; i++) {
 			epcData.add(pallets[i]);
 		}
-		
-		for (int i = 0; i < 4; i++) {
+		for (int i = 0; i < reworkCaseCount; i++) {
 			epcData.add(cases[i]);
 		}
-		
-		updateTagWithValues(filePath, "epc", epcData);
+		updateTagWithValues(filePath, TAG_EPC, epcData);
 		epcData.stream().forEach(System.out::println);
-		
-		/** update parent data **/
+
+		/** Update parentID: both pallets **/
 		List<String> parentData = new ArrayList<>();
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < reworkPalletCount; i++) {
 			parentData.add(pallets[i]);
 		}
-		updateTagWithValues(filePath, "parentID", parentData);
+		updateTagWithValues(filePath, TAG_PARENT_ID, parentData);
 		parentData.stream().forEach(System.out::println);
-		/** update Lot Number 
-		 * lot number tag for Soft Delete is used as "gs1ushc:lotNumber"
-		 * **/
-		
 	}
-	
-	
+
 	public void updateShippingXmlForEventTimeTest() {
 
 		String filePath = getResourcePath(XML_EVENT_TIME_SHIPPING);
-		
-		/** Update time stamp for the XML
-		 * 2/5/1/1
-		**/
-		List<String> eventTimeList = new ArrayList<>();
 
+		// Read shipping pallet index from YAML
+		int shippingPalletIndex = (int) td.getTestDataByPath(BaseTest.environment,
+				"TestCase.SeP_RTS_OQ_EvetTime_Test.ShippingXml.ShippingPalletIndex");
+
+		/** Update timestamp **/
+		List<String> eventTimeList = new ArrayList<>();
 		eventTimeList.add(getFixedTimestamp());
 		updateTagWithValues(filePath, TAG_EVENT_TIME, eventTimeList);
 		eventTimeList.stream().forEach(System.out::println);
-		
-		/** 
-		 * Update product information
-		 **/
+
+		/** Update EPC — specific pallet being shipped **/
 		List<String> epcData = new ArrayList<>();
-		epcData.add(pallets[1]);
-		
-		updateTagWithValues(filePath, "epc", epcData);
+		epcData.add(pallets[shippingPalletIndex]);
+		updateTagWithValues(filePath, TAG_EPC, epcData);
 		epcData.stream().forEach(System.out::println);
-		
-		/** 
-		 * Update biztransaction information
-		 **/
+
+		/** Update bizTransaction — all dynamically generated **/
 		List<String> biztransaction = new ArrayList<>();
 		biztransaction.add(RandomStringUtils.randomNumeric(7));
 		biztransaction.add(RandomStringUtils.randomNumeric(8));
-		biztransaction.add(RandomStringUtils.randomNumeric(1)+RandomStringUtils.randomAlphabetic(2)+"-"+RandomStringUtils.randomNumeric(1)+RandomStringUtils.randomAlphabetic(2)+"-"+RandomStringUtils.randomNumeric(5)+"-"+RandomStringUtils.randomAlphabetic(1));
+		biztransaction.add(RandomStringUtils.randomNumeric(1) + RandomStringUtils.randomAlphabetic(2) + "-"
+				+ RandomStringUtils.randomNumeric(1) + RandomStringUtils.randomAlphabetic(2) + "-"
+				+ RandomStringUtils.randomNumeric(5) + "-" + RandomStringUtils.randomAlphabetic(1));
 		biztransaction.add("0");
 		String date = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
-		biztransaction.add(date+RandomStringUtils.randomNumeric(15));
-		
-		updateTagWithValues(filePath, "bizTransaction", biztransaction);
+		biztransaction.add(date + RandomStringUtils.randomNumeric(15));
+		updateTagWithValues(filePath, TAG_BIZ_TRANSACTION, biztransaction);
 		biztransaction.stream().forEach(System.out::println);
-		
 	}
-	
+
 	public LoginPage clickAllocateButtonForSharedBhsSa(String message, int count) {
 		click(allocateButton, message);
 		waitForElementToBeDisplayed(getDriver(), excelIcon, 30, 3);
 		Assert.assertTrue(excelIcon.isDisplayed(), "After clicking on allocation excel files are not generated");
 		if (count > abc.length) {
-			abc = new String[count]; // Create new array with required size
+			abc = new String[count];
 		}
 		if (count < abc.length) {
-			abc = new String[count]; // Create new array with required size
+			abc = new String[count];
 		}
 		for (int i = 1; i <= count; i++) {
 			WebElement ele = getDriver()
-					.findElement(By.xpath("//div[@id='divScrollable']/table/tbody/tr[" + (i+1) + "]/td[1]"));
+					.findElement(By.xpath("//div[@id='divScrollable']/table/tbody/tr[" + (i + 1) + "]/td[1]"));
 			abc[i - 1] = ele.getText();
 		}
 		getDriver().switchTo().defaultContent();
 		LoginPage lp = new LoginPage();
 		return lp;
 	}
-	
-	public void enterPalletInformationForSwlDev06(String message,String palletCode, int count) {
+
+	public void enterPalletInformationForSwlDev06(String message, String palletCode, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -2406,8 +2087,8 @@ public class SerializePage extends BasePage {
 		}
 		getDriver().switchTo().defaultContent();
 	}
-	
-	public void enterPartialPalletInformationForSwlDev06(String message,String palletCode, int count) {
+
+	public void enterPartialPalletInformationForSwlDev06(String message, String palletCode, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -2428,8 +2109,8 @@ public class SerializePage extends BasePage {
 		}
 		getDriver().switchTo().defaultContent();
 	}
-	
-	public void enterCaseInformationForSwlDev06(String message,String caseCode, int count) {
+
+	public void enterCaseInformationForSwlDev06(String message, String caseCode, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -2450,8 +2131,8 @@ public class SerializePage extends BasePage {
 		}
 		getDriver().switchTo().defaultContent();
 	}
-	
-	public void enterProductInformationForSwlDev06(String message,String pCode, int count) {
+
+	public void enterProductInformationForSwlDev06(String message, String pCode, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -2475,45 +2156,44 @@ public class SerializePage extends BasePage {
 		}
 		getDriver().switchTo().defaultContent();
 	}
-	
+
 	public LoginPage updateSwlDev06XmlForSwissLog() {
 		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
 				+ File.separator + "resources" + File.separator + "SWLDEV06.XML";
 		List<String> epcData = new ArrayList<>();
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			epcData.add(palletSwissThree[i]);
 		}
-		for(int i =0;i<2;i++) {
+		for (int i = 0; i < 2; i++) {
 			epcData.add(partialPallets[i]);
 		}
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			epcData.add(caseSwissSix[i]);
 		}
-		
-		for(int i =0;i<15;i++) {
+		for (int i = 0; i < 15; i++) {
 			epcData.add(abc[i]);
 		}
-		for(int i =0;i<15;i++) {
+		for (int i = 0; i < 15; i++) {
 			epcData.add(abc[i]);
 		}
-		for(int i =0;i<2;i++) {
+		for (int i = 0; i < 2; i++) {
 			epcData.add(partialPallets[i]);
 		}
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			epcData.add(caseSwissSix[i]);
 		}
 		updateTagWithValues(filePath, "epc", epcData);
 		List<String> parentData = new ArrayList<>();
-		for(int i =0;i<2;i++) {
+		for (int i = 0; i < 2; i++) {
 			parentData.add(partialPallets[i]);
 		}
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			parentData.add(caseSwissSix[i]);
 		}
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			parentData.add(palletSwissThree[i]);
 		}
-		updateTagWithValues(filePath, "parentID", parentData);	
+		updateTagWithValues(filePath, "parentID", parentData);
 
 		List<String> timeSt = new ArrayList<>();
 		for (int i = 0; i < 7; i++) {
@@ -2522,7 +2202,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -2538,8 +2217,8 @@ public class SerializePage extends BasePage {
 		LoginPage lp = new LoginPage();
 		return lp;
 	}
-	
-	public void enterPalletInformationForSwlDev07(String message,String palletCode, int count) {
+
+	public void enterPalletInformationForSwlDev07(String message, String palletCode, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -2560,8 +2239,8 @@ public class SerializePage extends BasePage {
 		}
 		getDriver().switchTo().defaultContent();
 	}
-	
-	public void enterCaseInformationForSwlDev07(String message,String caseCode, int count) {
+
+	public void enterCaseInformationForSwlDev07(String message, String caseCode, int count) {
 		getDriver().switchTo().defaultContent();
 		getDriver().switchTo().frame(bodyFrame);
 		waitForElementToBeDisplayed(getDriver(), productCode, 30, 3);
@@ -2582,38 +2261,35 @@ public class SerializePage extends BasePage {
 		}
 		getDriver().switchTo().defaultContent();
 	}
-	
+
 	public void updateSwlDev07XmlForSwissLog() {
 		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
 				+ File.separator + "resources" + File.separator + "SWLDEV07.XML";
 		List<String> epcData = new ArrayList<>();
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			epcData.add(palletSwissFour[i]);
 		}
-		
-		for(int i =0;i<2;i++) {
+		for (int i = 0; i < 2; i++) {
 			epcData.add(caseSwissSeven[i]);
 		}
-		
-		for(int i =0;i<10;i++) {
+		for (int i = 0; i < 10; i++) {
 			epcData.add(abc[i]);
 		}
-		for(int i =0;i<10;i++) {
+		for (int i = 0; i < 10; i++) {
 			epcData.add(abc[i]);
 		}
-		for(int i =0;i<2;i++) {
+		for (int i = 0; i < 2; i++) {
 			epcData.add(caseSwissSeven[i]);
 		}
 		updateTagWithValues(filePath, "epc", epcData);
 		List<String> parentData = new ArrayList<>();
-		for(int i =0;i<2;i++) {
+		for (int i = 0; i < 2; i++) {
 			epcData.add(caseSwissSeven[i]);
 		}
-		
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			parentData.add(palletSwissFour[i]);
 		}
-		updateTagWithValues(filePath, "parentID", parentData);	
+		updateTagWithValues(filePath, "parentID", parentData);
 
 		List<String> timeSt = new ArrayList<>();
 		for (int i = 0; i < 6; i++) {
@@ -2622,7 +2298,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -2636,25 +2311,25 @@ public class SerializePage extends BasePage {
 		lotNum.add(text);
 		updateTagWithValues(filePath, "gs1ushc:lotNumber", lotNum);
 	}
-	
+
 	public LoginPage updateShipmentForSwissLogMultiple() {
 		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
 				+ File.separator + "resources" + File.separator + "Swisslog_shipment_DEV.XML";
 		List<String> epcData = new ArrayList<>();
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			epcData.add(palletBahrain[i]);
 		}
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			epcData.add(palletSwissTwo[i]);
 		}
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			epcData.add(palletSwissThree[i]);
 		}
-		for(int i =0;i<1;i++) {
+		for (int i = 0; i < 1; i++) {
 			epcData.add(palletSwissFour[i]);
 		}
 		updateTagWithValues(filePath, "epc", epcData);
-		
+
 		List<String> timeSt = new ArrayList<>();
 		for (int i = 0; i < 1; i++) {
 			String time = getFixedTimestamp();
@@ -2662,7 +2337,6 @@ public class SerializePage extends BasePage {
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -2670,5 +2344,255 @@ public class SerializePage extends BasePage {
 		LoginPage lp = new LoginPage();
 		return lp;
 	}
-	
+
+	public void updateAggregrateXmlForShipmentNegativeTest() {
+		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
+				+ File.separator + "resources" + File.separator + "5829STNA.xml";
+
+		String[] time = new String[4];
+		List<String> eventTimeList = new ArrayList<>();
+
+		for (int i = 0; i < time.length; i++) {
+			time[i] = getFixedTimestamp();
+			try {
+				Thread.sleep(15000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		int noOfAddActionObjectEvent = 2;
+		int noOfAddActionAggregationEvent1 = 1;
+		int noOfAddActionAggregationEvent2 = 1;
+		int noOfObservationActionObjectEvent = 1;
+		for (int i = 0; i < noOfAddActionObjectEvent; i++) {
+			eventTimeList.add(time[0]);
+		}
+		for (int i = 0; i < noOfAddActionAggregationEvent1; i++) {
+			eventTimeList.add(time[1]);
+		}
+		for (int i = 0; i < noOfAddActionAggregationEvent2; i++) {
+			eventTimeList.add(time[2]);
+		}
+		for (int i = 0; i < noOfObservationActionObjectEvent; i++) {
+			eventTimeList.add(time[3]);
+		}
+		updateTagWithValues(filePath, "eventTime", eventTimeList);
+		eventTimeList.stream().forEach(System.out::println);
+
+		List<String> epcData = new ArrayList<>();
+		for (int i = 0; i < 1; i++) {
+			epcData.add(products[i]);
+		}
+		for (int i = 0; i < 1; i++) {
+			epcData.add(cases[i]);
+		}
+		for (int i = 0; i < 1; i++) {
+			epcData.add(products[i]);
+		}
+		for (int i = 0; i < 1; i++) {
+			epcData.add(pallets[i]);
+		}
+		for (int i = 0; i < 1; i++) {
+			epcData.add(cases[i]);
+		}
+		updateTagWithValues(filePath, "epc", epcData);
+		epcData.stream().forEach(System.out::println);
+
+		List<String> parentData = new ArrayList<>();
+		for (int i = 0; i < 1; i++) {
+			parentData.add(cases[i]);
+		}
+		for (int i = 0; i < 1; i++) {
+			parentData.add(pallets[i]);
+		}
+		updateTagWithValues(filePath, "parentID", parentData);
+		parentData.stream().forEach(System.out::println);
+
+		Long n = randomNumber(6);
+		String text = "5829STNA" + Long.toString(n);
+		this.lotNumber = text;
+		List<String> lotNum = new ArrayList<>();
+		lotNum.add(text);
+		lotNum.add(text);
+		lotNum.add(text);
+		updateTagWithValues(filePath, "gs1ushc:lotNumber", lotNum);
+		lotNum.stream().forEach(System.out::println);
+	}
+
+	public void updateShippingXmlForShipmentNegativeTest(String SenderOwner, String SenderCustodian,
+			String ReceiverOwner, String ReceiverCustodian) {
+		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
+				+ File.separator + "resources" + File.separator + "5829STNA_shipping.xml";
+
+		List<String> eventTimeList = new ArrayList<>();
+		eventTimeList.add(getFixedTimestamp());
+		updateTagWithValues(filePath, "eventTime", eventTimeList);
+		eventTimeList.stream().forEach(System.out::println);
+
+		List<String> epcData = new ArrayList<>();
+		for (int i = 0; i < 1; i++) {
+			epcData.add(pallets[i]);
+		}
+		updateTagWithValues(filePath, "epc", epcData);
+		epcData.stream().forEach(System.out::println);
+
+		List<String> senderCustodianID = new ArrayList<>();
+		for (int i = 0; i < 2; i++) {
+			senderCustodianID.add(SenderCustodian);
+		}
+		updateTagWithValues(filePath, "id", senderCustodianID);
+		senderCustodianID.stream().forEach(System.out::println);
+
+		List<String> source = new ArrayList<>();
+		source.add(SenderOwner);
+		source.add(SenderCustodian);
+		updateTagWithValues(filePath, "source", source);
+		source.stream().forEach(System.out::println);
+
+		List<String> destination = new ArrayList<>();
+		destination.add(ReceiverOwner);
+		destination.add(ReceiverCustodian);
+		updateTagWithValues(filePath, "destination", destination);
+		destination.stream().forEach(System.out::println);
+	}
+
+	public void updateSecondShipmentXmlForSharedEuSaTest() {
+		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
+				+ File.separator + "resources" + File.separator + "SharedCode_NonSAU_Ship2.xml";
+
+		List<String> epcData = new ArrayList<>();
+		epcData.add(palletBahrain[1]);
+		epcData.add(palletBahrain[2]);
+		updateTagWithValues(filePath, "epc", epcData);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		String time = getFixedTimestamp();
+		List<String> a = new ArrayList<>();
+		a.add(time);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		updateTagWithValues(filePath, "eventTime", a);
+
+		List<String> lotNum = new ArrayList<>();
+		lotNum.add(lotNumber);
+		lotNum.add("08132025");
+		lotNum.add(lotNumber);
+		lotNum.add("20250813QA");
+		updateTagWithValues(filePath, "bizTransaction", lotNum);
+	}
+
+	public void updateAggregrateXmlForSharedBhSaTest() {
+		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
+				+ File.separator + "resources" + File.separator + "BAHSAQA2_Comm_Agg.xml";
+
+		List<String> epcData = new ArrayList<>();
+		for (int i = 0; i < 4; i++) {
+			epcData.add(abc[i]);
+		}
+		for (int i = 0; i < 2; i++) {
+			epcData.add(palletBahrain[i]);
+		}
+		for (int i = 0; i < 4; i++) {
+			epcData.add(abc[i]);
+		}
+		updateTagWithValues(filePath, "epc", epcData);
+		String[] time = new String[4];
+		List<String> a = new ArrayList<>();
+		for (int i = 0; i < time.length; i++) {
+			time[i] = getFixedTimestamp();
+			a.add(time[i]);
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		updateTagWithValues(filePath, "eventTime", a);
+		Long n = randomNumber(4);
+		String text = "BHSA" + Long.toString(n);
+		lotNumber = text;
+		List<String> lotNum = new ArrayList<>();
+		lotNum.add(text);
+		lotNum.add(text);
+		updateTagWithValues(filePath, "cbvmda:lotNumber", lotNum);
+	}
+
+	public void updateFirstShipmentXmlForSharedBhSaTest() {
+		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
+				+ File.separator + "resources" + File.separator + "SharedCode_Bahrain_SA_Ship3.xml";
+
+		List<String> epcData = new ArrayList<>();
+		epcData.add(palletBahrain[0]);
+		updateTagWithValues(filePath, "epc", epcData);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		String time = getFixedTimestamp();
+		List<String> a = new ArrayList<>();
+		a.add(time);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		updateTagWithValues(filePath, "eventTime", a);
+	}
+
+	public void updateSecondShipmentXmlForSharedBhSaTest() {
+		String filePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "test"
+				+ File.separator + "resources" + File.separator + "SharedCode_Bahrain_SA_Ship4.xml";
+
+		List<String> epcData = new ArrayList<>();
+		epcData.add(palletBahrain[1]);
+		updateTagWithValues(filePath, "epc", epcData);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		String time = getFixedTimestamp();
+		List<String> a = new ArrayList<>();
+		a.add(time);
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		updateTagWithValues(filePath, "eventTime", a);
+	}
+
+	public void enterProductCode(String message, String pCode) throws Exception {
+		waitForElementToBeDisplayed(getDriver(), productCode, 40, 4);
+		sendKeys(productCode, pCode, message);
+		WebElement ele = getDriver().findElement(By.xpath("//div[contains(text(),'" + pCode + "_" + pCode + "')]"));
+		waitForElementToBeDisplayed(getDriver(), ele, 20, 3);
+		click(ele, message + "selecting unit");
+		JavaScriptExecutorUtil.waitUntilJavaScriptCompletesByDuration(getDriver(), 10);
+		Wait<WebDriver> wait = new FluentWait<WebDriver>(getDriver()).withTimeout(Duration.ofSeconds(30))
+				.pollingEvery(Duration.ofSeconds(5)).ignoring(Exception.class);
+		ExpectedCondition<Boolean> productCodeLoaded = new ExpectedCondition<Boolean>() {
+			@Override
+			public Boolean apply(WebDriver driver) {
+				List<WebElement> procuctCode = getDriver()
+						.findElements(By.xpath("//div[@id='ajax_listOfOptions']/div"));
+				return procuctCode.size() > 0;
+			}
+		};
+		wait.until(productCodeLoaded);
+		Thread.sleep(2000);
+	}
+
+	public void selectSiteId(String siteName) throws Exception {
+		waitForElementToBeDisplayed(getDriver(), siteId, 30, 3);
+		selectElementFromDropDownByVisibleText(siteId, siteName);
+		JavaScriptExecutorUtil.waitUntilJavaScriptCompletesByDuration(getDriver(), 10);
+	}
 }
