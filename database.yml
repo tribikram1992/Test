@@ -1,0 +1,2267 @@
+databases:
+  - id: rs17vms901
+    platform: mssql
+    driver: pyodbc
+    host: rs17vms901.cohibnqpxtbz.ap-southeast-1.rds.amazonaws.com
+    port: 1433
+    username: baxflex_usr
+    schemas:
+      - name: Baxflex
+        tables:
+          - name: BaxflexComplianceInfo
+            #Expose all columns in this table
+            metadata:
+              description: "This table contains compliance information for Baxflex employees."
+              tags: ["compliance", "employee"]
+              note: "This table is critical for compliance reporting and auditing purposes."
+              # Add other metadata fields under additional_metadata as needed e.g., join_keys, rules, etc.
+
+          - name: BaxflexNonComplianceInfo
+            # Expose all columns in this table
+            metadata:
+              description: "This table contains non-compliance information for Baxflex employees."
+              tags: ["non-compliance", "employee"]
+              note: "This table is used for tracking non-compliance incidents and related actions."
+              # Add other metadata fields under additional_metadata as needed e.g., last_updated, compliance_status, etc.
+
+          - name: EmployeeAttendanceReport
+            # Expose all columns in this table
+            metadata:
+              description: "This table contains attendance information for Baxflex employees."
+              tags: ["attendance", "employee"]
+              note: "This table is used for tracking employee attendance and related actions."
+              # Add other metadata fields under additional_metadata as needed e.g., join_keys, dependencies, etc.
+
+          - name: WorkdayEmpMaster
+            # Expose all columns in this table
+            metadata:
+              description: "This table contains master information for Baxflex employees."
+              tags: ["master", "employee"]
+              note: "This table is used for managing employee master data."
+              # Add other metadata fields under additional_metadata as needed e.g., join_keys, rules, etc.
+        metadata:
+          description: "This schema contains tables related to Baxflex employee attendance management."
+          tags: ["employee", "management", "baxflex", "attendance"]
+          note: "This schema is critical for managing employee data and related processes."
+          additional_metadata:
+            owner: "HR Department"
+            # Add other metadata fields as needed e.g., last_updated, compliance_status, etc.
+
+  - id: oracle_local
+    platform: oracle
+    driver: oracledb
+    host: localhost
+    port: 1521
+    username: BAXTER_TEST
+    service_name: XEPDB1 #used by Oracle platform for DSN connection
+    schemas:
+      - name: BAXTER_TEST
+        tables:
+          - name: EMPLOYEES
+            columns:
+              - EMPLOYEE_NAME
+              - EMAIL
+              - DEPARTMENT
+              - JOB_TITLE
+              - name: IS_ACTIVE
+                allowed_values: [0, 1]
+                sensitive: true
+                metadata:
+                  description: "Indicates whether the employee is currently active (1) or inactive (0)."
+                  tags: ["status", "employee"]
+                  note: "This column is critical for determining the current employment status of an employee."
+                  # Add other metadata fields under additional_metadata as needed e.g., validation_rules, dependencies, etc.
+            metadata:
+              description: "This table contains employee records for the Local Oracle Database."
+              tags: ["employee", "records"]
+              note: "This table is critical for managing employee data and related processes."
+              # Add other metadata fields under additional_metadata as needed e.g., join_keys, rules, etc.
+
+          - name: DEPARTMENTS
+            #Expose all columns in this table
+            metadata:
+              description: "This table contains department records for the Local Oracle Database."
+              tags: ["department", "records"]
+              note: "This table is used for managing department data and related processes."
+              additional_metadata:
+                owner: "Testing Department"
+              # Add other metadata fields under additional_metadata as needed e.g., last_updated, compliance_status, etc.
+
+          - name: ATTENDANCE
+            #Expose all columns in this table
+            metadata:
+              description: "This table contains attendance records for the Local Oracle Database."
+              tags: ["attendance", "records"]
+              note: "This table is used for managing attendance data and related processes."
+              # Add other metadata fields under additional_metadata as needed e.g., join_keys, dependencies, etc.
+        metadata:
+          description: "This schema contains tables related to Local Oracle Database Employee Records."
+          tags: ["employee", "management", "baxter"]
+          note: "This schema is critical for managing employee data and related processes."
+          additional_metadata:
+            owner: "HR Department"
+            # Add other metadata fields as needed e.g., last_updated, compliance_status, etc.
+
+  - id: local
+    platform: mssql
+    driver: pymssql
+    host: localhost
+    port: 1433
+    username: sa
+    schemas:
+      - name: Baxflex
+        tables:
+          - name: BaxflexComplianceInfo
+            #Expose all columns in this table
+            metadata:
+              description: "This table contains compliance information for Baxflex employees."
+              tags: ["compliance", "employee"]
+              note: "This table is critical for compliance reporting and auditing purposes."
+              # Add other metadata fields under additional_metadata as needed e.g., join_keys, rules, etc.
+
+          - name: BaxflexNonComplianceInfo
+            # Expose all columns in this table
+            metadata:
+              description: "This table contains non-compliance information for Baxflex employees."
+              tags: ["non-compliance", "employee"]
+              note: "This table is used for tracking non-compliance incidents and related actions."
+              # Add other metadata fields under additional_metadata as needed e.g., last_updated, compliance_status, etc.
+
+          - name: EmployeeAttendanceReport
+            columns:
+              - EmployeeName
+              - Attdate
+              - StartTime
+              - EndTime
+              - name: Iscompliance
+                allowed_values: [0, 1]
+                sensitive: true
+                metadata:
+                  description: "Indicates whether the attendance record is compliant (1) or non-compliant (0)."
+                  tags: ["compliance", "attendance"]
+                  note: "This column is critical for determining the compliance status of an employee's attendance."
+                  # Add other metadata fields under additional_metadata as needed e.g., validation_rules, dependencies, etc.
+            metadata:
+              description: "This table contains attendance information for Baxflex employees."
+              tags: ["attendance", "employee"]
+              note: "This table is used for tracking employee attendance and related actions."
+              # Add other metadata fields under additional_metadata as needed e.g., join_keys, dependencies, etc.
+
+          - name: WorkdayEmpMaster
+            # Expose all columns in this table
+            metadata:
+              description: "This table contains master information for Baxflex employees."
+              tags: ["master", "employee"]
+              note: "This table is used for managing employee master data."
+              # Add other metadata fields under additional_metadata as needed e.g., join_keys, rules, etc.
+        metadata:
+          description: "This schema contains tables related to Baxflex employee attendance management."
+          tags: ["employee", "management", "baxflex", "attendance"]
+          note: "This schema is critical for managing employee data and related processes."
+          additional_metadata:
+            owner: "HR Department"
+            # Add other metadata fields as needed e.g., last_updated, compliance_status, etc.
+
+  - id: jde
+    platform: oracle
+    driver: oracledb
+    host: dbsjde9eu.aws.baxter.com
+    port: 1521
+    username: ESA_TBL_USER
+    service_name: svcJDE9EU.aws.baxter.com
+    schemas:
+      - name: EUDTA
+        metadata:
+          description: "JDE EnterpriseOne schema for Baxter's Order-to-Cash (O2C) process covering
+                         sales orders, AR, inventory, shipments, GL and AP. Primary source for
+                         revenue, backlog, DSO, OTIF and financial reporting analytics."
+          tags: ["JDE", "O2C", "order-to-cash", "AR", "inventory", "shipments", "GL", "AP", "finance", "supply-chain"]
+          note: "JDE stores all amounts as raw integers — divide by 100 for currency amounts and
+                 by 10000 for quantities and prices unless noted otherwise per column.
+                 All dates are in Julian format (CYYDDD) — convert to calendar date for display.
+                 Always decode status/category codes via F0005 UDC table using the SY+RT keys
+                 documented per column."
+          additional_metadata:
+            owner: "Baxter Finance & Supply Chain"
+            region: "EU"
+
+        tables:
+          - name: F0010
+            metadata:
+              description: "Company Constants — one row per legal entity. Provides company code,
+                             name, base currency and current fiscal calendar.
+                             Used for revenue consolidation across all O2C reports."
+              tags: ["company", "legal-entity", "fiscal-calendar", "currency", "O2C"]
+              note: "Join here to resolve company codes to legal entity names and base currency.
+                     CCFY and CCPN give the current open fiscal year and period."
+            columns:
+              - name: CCCO
+                metadata:
+                  description: "Company code — 5-char JDE company identifier. Primary key."
+              - name: CCNAME
+                metadata:
+                  description: "Legal entity name."
+              - name: CCCRCD
+                metadata:
+                  description: "Base currency code (ISO 4217)."
+              - name: CCFY
+                metadata:
+                  description: "Current open fiscal year."
+              - name: CCPN
+                metadata:
+                  description: "Current open fiscal period (1-12 or 1-13)."
+              - name: CCDTPN
+                metadata:
+                  description: "Beginning-of-fiscal-year Julian date (CYYDDD)."
+                  note: "Julian date format CYYDDD — convert to calendar date for display."
+
+          - name: F0006
+            metadata:
+              description: "Business Unit Master — every branch, plant, department and selling BU.
+                             Powers region / country / plant slicing of bookings, backlog,
+                             shipments and GL revenue."
+              tags: ["business-unit", "branch", "plant", "region", "country", "O2C"]
+              note: "Use MCSTYL to filter BU type (BS=business, MC=mfg, SL=sales, DP=dept).
+                     MCRP01..MCRP05 are category codes — decode via F0005 SY='00' RT='01'..'05'
+                     for Region, Country and Division slicing."
+            columns:
+              - name: MCMCU
+                metadata:
+                  description: "Business Unit code (branch / plant). Primary key."
+              - name: MCCO
+                metadata:
+                  description: "Owning company code — FK to F0010.CCCO."
+              - name: MCDL01
+                metadata:
+                  description: "Business unit description (first line)."
+              - name: MCSTYL
+                metadata:
+                  description: "Business Unit Type — BS (business), MC (mfg), SL (sales), DP (dept)."
+                allowed_values: ["BS", "MC", "SL", "DP"]
+              - name: MCRP01
+                metadata:
+                  description: "Category code 01 — typically Region."
+                  note: "Decode via F0005 SY='00' RT='01'."
+              - name: MCRP02
+                metadata:
+                  description: "Category code 02 — typically Country."
+                  note: "Decode via F0005 SY='00' RT='02'."
+              - name: MCRP03
+                metadata:
+                  description: "Category code 03 — typically Plant type / Division."
+                  note: "Decode via F0005 SY='00' RT='03'."
+              - name: MCRP04
+                metadata:
+                  description: "Category code 04 — Baxter-specific usage."
+              - name: MCRP05
+                metadata:
+                  description: "Category code 05 — Baxter-specific usage."
+
+          - name: F0101
+            metadata:
+              description: "Address Book Master — global master for customers, ship-to, sold-to,
+                             suppliers and other parties. Every party is identified here by AN8."
+              tags: ["customer", "supplier", "address-book", "party", "AN8", "O2C"]
+              note: "ABAN8 is the universal party key across all JDE tables. Filter ABAT1='C'
+                     for customers, 'V' for vendors, 'E' for employees."
+            columns:
+              - name: ABAN8
+                metadata:
+                  description: "Address Number — universal party key across JDE. Primary key."
+                  note: "Referenced as AN8 in virtually every JDE table."
+              - name: ABALPH
+                metadata:
+                  description: "Alpha name — customer/supplier display name. May be masked for demo."
+              - name: ABAT1
+                metadata:
+                  description: "Search Type — 'C'=Customer, 'V'=Vendor, 'E'=Employee etc."
+                  note: "Always filter by ABAT1 to avoid cross-contamination between customers and vendors."
+                allowed_values: ["C", "V", "E"]
+              - name: ABTAX
+                metadata:
+                  description: "Tax ID (VAT/GST/TIN) for the party."
+              - name: ABMCU
+                metadata:
+                  description: "Home business unit — FK to F0006.MCMCU."
+              - name: ABAC01
+                metadata:
+                  description: "Address book category code 01 — often industry / segment."
+              - name: ABAC02
+                metadata:
+                  description: "Address book category code 02."
+              - name: ABAC03
+                metadata:
+                  description: "Address book category code 03."
+
+          - name: F0111
+            metadata:
+              description: "Who's Who — one row per contact person tied to an Address Book party.
+                             Used to find the buyer, AR clerk or account-manager contact for each customer."
+              tags: ["contact", "customer", "address-book", "O2C"]
+              note: "Composite PK is WWAN8 + WWIDLN. WWDFLT='Y' identifies the default contact."
+            columns:
+              - name: WWAN8
+                metadata:
+                  description: "Address Number — FK to F0101.ABAN8."
+              - name: WWIDLN
+                metadata:
+                  description: "Line number within the AN8 (unique per contact). Primary key with WWAN8."
+              - name: WWMLNM
+                metadata:
+                  description: "Mailing name of the contact."
+              - name: WWATTL
+                metadata:
+                  description: "Attention/title (Mr, Ms, Dr etc.)."
+              - name: WWTYC
+                metadata:
+                  description: "Contact type — buyer, billing, ship-to, credit clerk etc."
+              - name: WWGNNM
+                metadata:
+                  description: "Given (first) name."
+              - name: WWSRNM
+                metadata:
+                  description: "Surname (last name)."
+              - name: WWDFLT
+                metadata:
+                  description: "Default contact flag ('Y'=default for the customer)."
+                allowed_values: ["Y", "N"]
+
+          - name: F0115
+            metadata:
+              description: "Phones — phone numbers and email addresses for Address Book contacts.
+                             Used for communications during O2C (collections, dispute follow-up)."
+              tags: ["phone", "email", "contact", "address-book", "O2C"]
+            columns:
+              - name: PHAN8
+                metadata:
+                  description: "Address Number — FK to F0101.ABAN8."
+              - name: PHIDLN
+                metadata:
+                  description: "Contact line number — FK to F0111.WWIDLN."
+              - name: PHRCK7
+                metadata:
+                  description: "Sequence number of the phone/email entry. Part of composite PK."
+              - name: PHPHTP
+                metadata:
+                  description: "Phone type — BUS, FAX, EMAIL, MOB etc."
+                allowed_values: ["BUS", "FAX", "EMAIL", "MOB"]
+              - name: PHAR1
+                metadata:
+                  description: "Area code / country code prefix."
+              - name: PHPH1
+                metadata:
+                  description: "Phone number or email string."
+
+          - name: F0116
+            metadata:
+              description: "Address by Date — effective-dated address history for AN8 parties.
+                             Used for point-in-time ship-to addressing and audit."
+              tags: ["address", "ship-to", "effective-dated", "O2C"]
+              note: "Use ALEFTB (effective-from Julian date) for point-in-time address lookups."
+            columns:
+              - name: ALAN8
+                metadata:
+                  description: "Address Number — FK to F0101.ABAN8."
+              - name: ALEFTB
+                metadata:
+                  description: "Effective-from Julian date. Part of composite PK with ALAN8."
+                  note: "Julian date — use for point-in-time address lookups."
+              - name: ALADD1
+                metadata:
+                  description: "Address line 1."
+              - name: ALADD2
+                metadata:
+                  description: "Address line 2."
+              - name: ALCTY1
+                metadata:
+                  description: "City."
+              - name: ALADDS
+                metadata:
+                  description: "State / province code."
+              - name: ALCTR
+                metadata:
+                  description: "Country code."
+              - name: ALADDZ
+                metadata:
+                  description: "Postal / ZIP code."
+              - name: ALCOUN
+                metadata:
+                  description: "County name."
+
+          - name: F0150
+            metadata:
+              description: "Address Organization Structure Master — hierarchies of Address Book records
+                             (parent → child). Used to build global-account rollups
+                             (e.g. HCA → all HCA hospitals)."
+              tags: ["hierarchy", "customer", "global-account", "rollup", "O2C"]
+              note: "Filter MOSTYP='CUST' for customer rollup hierarchy. MOPA8 is the parent AN8."
+            columns:
+              - name: MOAN8
+                metadata:
+                  description: "Address Number of the child party — FK to F0101.ABAN8."
+              - name: MOSTYP
+                metadata:
+                  description: "Structure type — identifies which hierarchy (e.g. 'CUST' for customer rollup)."
+              - name: MOPA8
+                metadata:
+                  description: "Parent Address Number in the hierarchy."
+              - name: MOEFTB
+                metadata:
+                  description: "Effective-from Julian date for the relationship."
+                  note: "Julian date — filter for active relationships."
+              - name: MOEFTE
+                metadata:
+                  description: "Effective-to Julian date."
+                  note: "Julian date — null or 9999365 means currently active."
+
+          - name: F0030
+            metadata:
+              description: "Bank Transit Master — customer and company bank account details.
+                             Used for lockbox / direct-debit / EFT receipt processing."
+              tags: ["bank", "EFT", "lockbox", "payment", "O2C"]
+            columns:
+              - name: BATRAN
+                metadata:
+                  description: "Bank transit / routing number. Primary key."
+              - name: BAAN8
+                metadata:
+                  description: "Address Number of the bank owner — FK to F0101.ABAN8."
+              - name: BAACT
+                metadata:
+                  description: "Bank account number."
+                sensitive: true
+              - name: BABKLN
+                metadata:
+                  description: "Bank name / description."
+              - name: BABKAT
+                metadata:
+                  description: "Bank account type — checking/savings/EFT."
+                allowed_values: ["checking", "savings", "EFT"]
+              - name: BASWFT
+                metadata:
+                  description: "SWIFT / BIC code for international payments."
+              - name: BACRCD
+                metadata:
+                  description: "Bank account currency."
+
+          - name: F03012
+            metadata:
+              description: "Customer Master by Line of Business — extends F0101 with AR-specific
+                             attributes per company: credit limit, payment terms, currency,
+                             hold code, industry. Key table for credit-hold, DSO and top-customer analytics."
+              tags: ["customer", "credit", "AR", "payment-terms", "hold", "DSO", "O2C"]
+              note: "Composite PK is AIAN8 + AICO. AICRCA is raw — divide by 100 for credit limit.
+                     AIHDAR non-blank means customer is on AR hold."
+            columns:
+              - name: AIAN8
+                metadata:
+                  description: "Address Number — FK to F0101.ABAN8. Composite PK with AICO."
+              - name: AICO
+                metadata:
+                  description: "Company code — FK to F0010.CCCO. Composite PK with AIAN8."
+              - name: AITRAR
+                metadata:
+                  description: "Payment terms code (AR)."
+              - name: AICRCA
+                metadata:
+                  description: "Credit limit in base currency. Divide raw value by 100."
+                  note: "Raw integer — always divide by 100 to get actual credit limit amount."
+              - name: AIHDAR
+                metadata:
+                  description: "AR hold code — non-blank indicates customer on hold."
+                  note: "Non-blank value means customer is on AR hold. Decode via F0005 SY='42' RT='HC'."
+              - name: AICRCD
+                metadata:
+                  description: "Customer transaction currency."
+              - name: AISIC
+                metadata:
+                  description: "SIC / industry classification code."
+              - name: AIRYIN
+                metadata:
+                  description: "Region indicator code."
+              - name: AIALKY
+                metadata:
+                  description: "Long address / customer reference key."
+              - name: AITXA1
+                metadata:
+                  description: "Tax rate / area code applicable to the customer."
+              - name: AIEXR1
+                metadata:
+                  description: "Tax explanation code (V=VAT, S=Sales, E=Exempt etc.)."
+                allowed_values: ["V", "S", "E"]
+              - name: AISTMT
+                metadata:
+                  description: "Send statement flag ('Y'/'N')."
+                allowed_values: ["Y", "N"]
+
+          - name: F4006
+            metadata:
+              description: "Customer Billing Instructions — freight terms, shipping instructions
+                             and payment instrument defaults per customer/ship-to combination."
+              tags: ["billing", "freight", "shipping", "payment-instrument", "customer", "O2C"]
+            columns:
+              - name: COAN8
+                metadata:
+                  description: "Customer Address Number — FK to F0101.ABAN8."
+              - name: COSHAN
+                metadata:
+                  description: "Ship-to Address Number — FK to F0101.ABAN8."
+              - name: COFRTC
+                metadata:
+                  description: "Freight handling code — who pays the freight."
+              - name: COINMG
+                metadata:
+                  description: "Invoice-message text code."
+              - name: COPYIN
+                metadata:
+                  description: "Payment instrument (check, EFT, wire) default."
+              - name: COBACK
+                metadata:
+                  description: "Backorder allowance flag."
+                allowed_values: ["Y", "N"]
+              - name: COSBAL
+                metadata:
+                  description: "Substitutes allowed flag."
+                allowed_values: ["Y", "N"]
+              - name: COARTO
+                metadata:
+                  description: "AR trade GL account offset (revenue posting)."
+
+          - name: F4101
+            metadata:
+              description: "Item Master — global product catalog. One row per SKU with descriptions,
+                             category codes (product family, therapy area), UoM and stocking type.
+                             Powers product-mix analytics."
+              tags: ["item", "SKU", "product", "catalog", "therapy-area", "inventory", "O2C"]
+              note: "IMSRP1..IMSRP5 are sales category codes — decode via F0005 SY='41' RT='S1'..'S5'.
+                     IMLOTS non-blank = lot-controlled item (MedTech traceability required)."
+            columns:
+              - name: IMITM
+                metadata:
+                  description: "Short item number — internal JDE numeric key. Primary key."
+                  note: "Use this for all JDE-internal joins. IMLITM is the user-facing SKU code."
+              - name: IMLITM
+                metadata:
+                  description: "Second item number — customer/SKU code shown to users."
+              - name: IMAITM
+                metadata:
+                  description: "Third item number — often vendor/catalog reference."
+              - name: IMDSC1
+                metadata:
+                  description: "Primary item description."
+              - name: IMDSC2
+                metadata:
+                  description: "Secondary description line."
+              - name: IMSRP1
+                metadata:
+                  description: "Sales category code 1 — Product Family."
+                  note: "Decode via F0005 SY='41' RT='S1'."
+              - name: IMSRP2
+                metadata:
+                  description: "Sales category code 2 — Product Category."
+                  note: "Decode via F0005 SY='41' RT='S2'."
+              - name: IMSRP3
+                metadata:
+                  description: "Sales category code 3 — typically Therapy Area at Baxter."
+                  note: "Decode via F0005 SY='41' RT='S3'."
+              - name: IMSRP4
+                metadata:
+                  description: "Sales category code 4."
+                  note: "Decode via F0005 SY='41' RT='S4'."
+              - name: IMSRP5
+                metadata:
+                  description: "Sales category code 5."
+                  note: "Decode via F0005 SY='41' RT='S5'."
+              - name: IMUOM1
+                metadata:
+                  description: "Primary unit of measure (EA, CS, BX etc.)."
+              - name: IMSTKT
+                metadata:
+                  description: "Stocking type (S=stock, N=non-stock etc.)."
+                allowed_values: ["S", "N"]
+              - name: IMLOTS
+                metadata:
+                  description: "Lot process type — non-blank = lot-controlled (MedTech traceability)."
+                  note: "Non-blank means item requires lot tracking. Always join to F4108 for lot status."
+
+          - name: F4102
+            metadata:
+              description: "Item Branch/Plant — extends F4101 with branch-specific attributes:
+                             ABC class, planner, sales categories per branch. Composite PK (IBITM, IBMCU)."
+              tags: ["item", "branch", "plant", "ABC", "inventory", "O2C"]
+            columns:
+              - name: IBITM
+                metadata:
+                  description: "Short item number — FK to F4101.IMITM. Composite PK with IBMCU."
+              - name: IBMCU
+                metadata:
+                  description: "Business unit — FK to F0006.MCMCU. Composite PK with IBITM."
+              - name: IBLITM
+                metadata:
+                  description: "Second item number at branch level."
+              - name: IBABCS
+                metadata:
+                  description: "ABC classification for sales volume (A/B/C)."
+                allowed_values: ["A", "B", "C"]
+              - name: IBSRP1
+                metadata:
+                  description: "Branch-level sales category 1 (overrides IMSRP1 if set)."
+              - name: IBSRP2
+                metadata:
+                  description: "Branch-level sales category 2."
+              - name: IBSRP3
+                metadata:
+                  description: "Branch-level sales category 3."
+              - name: IBSTKT
+                metadata:
+                  description: "Stocking type at branch (may override F4101.IMSTKT)."
+              - name: IBPLEV
+                metadata:
+                  description: "Sales price level (item / branch / customer)."
+
+          - name: F4105
+            metadata:
+              description: "Item Cost — standard / average / actual cost by item, branch and cost method.
+                             Used for margin and cost-of-goods-sold analysis in O2C."
+              tags: ["cost", "COGS", "margin", "item", "inventory", "O2C"]
+              note: "COUNCS is raw — divide by 10000 to get unit cost."
+            columns:
+              - name: COITM
+                metadata:
+                  description: "Short item number — FK to F4101.IMITM."
+              - name: COMCU
+                metadata:
+                  description: "Business unit — FK to F0006.MCMCU."
+              - name: COLEDG
+                metadata:
+                  description: "Cost method (01=Last-In, 02=Weighted Avg, 07=Standard etc.)."
+                allowed_values: ["01", "02", "07"]
+              - name: COUNCS
+                metadata:
+                  description: "Unit cost (raw ÷ 10000)."
+                  note: "Always divide by 10000 to get actual unit cost."
+              - name: COCRCD
+                metadata:
+                  description: "Currency of the cost."
+
+          - name: F4106
+            metadata:
+              description: "Item Base Price — list price by item, branch and currency.
+                             Feeds the pricing engine that computes SDUPRC on order entry."
+              tags: ["price", "list-price", "item", "O2C"]
+              note: "BPUPRC is raw — divide by 10000. Filter by BPEFTJ/BPEXDJ for effective date range."
+            columns:
+              - name: BPITM
+                metadata:
+                  description: "Short item number — FK to F4101.IMITM."
+              - name: BPMCU
+                metadata:
+                  description: "Branch/plant — FK to F0006.MCMCU. Blank = corporate price."
+              - name: BPCRCD
+                metadata:
+                  description: "Price currency code."
+              - name: BPUPRC
+                metadata:
+                  description: "List price per unit (raw ÷ 10000)."
+                  note: "Always divide by 10000 to get actual list price."
+              - name: BPEFTJ
+                metadata:
+                  description: "Effective-from Julian date."
+                  note: "Julian date — filter range with BPEXDJ for current price."
+              - name: BPEXDJ
+                metadata:
+                  description: "Expiration Julian date."
+                  note: "Julian date — null or 9999365 means no expiration."
+
+          - name: F4072
+            metadata:
+              description: "Price Adjustment Detail (Advanced Pricing) — customer, volume, promo
+                             and contract discounts. Applied on top of F4106 base price during order entry."
+              tags: ["pricing", "discount", "promotion", "contract", "O2C"]
+            columns:
+              - name: ADASN
+                metadata:
+                  description: "Adjustment name (rule identifier)."
+              - name: ADITM
+                metadata:
+                  description: "Short item number this adjustment applies to."
+              - name: ADAN8
+                metadata:
+                  description: "Customer AN8 (if customer-specific)."
+              - name: ADEFTJ
+                metadata:
+                  description: "Effective-from Julian date."
+                  note: "Julian date — filter with ADEXDJ for active adjustments."
+              - name: ADEXDJ
+                metadata:
+                  description: "Expiration Julian date."
+              - name: ADFVTR
+                metadata:
+                  description: "Factor value — % or amount of the adjustment."
+              - name: ADFRMN
+                metadata:
+                  description: "Adjustment method code (%, amount, override)."
+
+          - name: F4074
+            metadata:
+              description: "Price Adjustment Schedule — links customers to which price-adjustment
+                             schedule applies. Referenced during order entry to invoke F4072 rules."
+              tags: ["pricing", "schedule", "customer", "O2C"]
+            columns:
+              - name: ASASHD
+                metadata:
+                  description: "Adjustment schedule name. Primary key."
+              - name: ASSTP
+                metadata:
+                  description: "Step number within the schedule."
+              - name: ASASN
+                metadata:
+                  description: "Adjustment name — FK to F4072.ADASN."
+              - name: ASEFTJ
+                metadata:
+                  description: "Effective-from Julian date."
+              - name: ASEXDJ
+                metadata:
+                  description: "Expiration Julian date."
+
+          - name: F41021
+            metadata:
+              description: "Item Location — on-hand quantity by item, branch, location and lot.
+                             Powers Available-to-Promise (ATP) and stock-out analytics."
+              tags: ["inventory", "on-hand", "ATP", "stock", "location", "lot", "O2C"]
+              note: "LIPQOH, LIHCOM, LISCOM are raw — divide by 10000. Available qty = LIPQOH - LIHCOM."
+            columns:
+              - name: LIITM
+                metadata:
+                  description: "Short item number — FK to F4101.IMITM."
+              - name: LIMCU
+                metadata:
+                  description: "Branch/plant — FK to F0006.MCMCU."
+              - name: LILOCN
+                metadata:
+                  description: "Location code within the branch (bin/aisle)."
+              - name: LILOTN
+                metadata:
+                  description: "Lot / serial number — FK to F4108.LOTN."
+              - name: LIPQOH
+                metadata:
+                  description: "Primary quantity on hand (raw ÷ 10000)."
+                  note: "Always divide by 10000. Available = LIPQOH - LIHCOM."
+              - name: LIHCOM
+                metadata:
+                  description: "Hard-committed quantity (raw ÷ 10000)."
+                  note: "Always divide by 10000. Subtract from LIPQOH for true available qty."
+              - name: LISCOM
+                metadata:
+                  description: "Soft-committed quantity (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: LIPBIN
+                metadata:
+                  description: "Primary bin flag."
+                allowed_values: ["Y", "N"]
+
+          - name: F4108
+            metadata:
+              description: "Lot Master — lot / serial numbers with status, expiry, manufacturing date.
+                             Critical for MedTech traceability and near-expiry alerts."
+              tags: ["lot", "serial", "expiry", "traceability", "MedTech", "inventory", "O2C"]
+              note: "LOLOTS='A' means available, 'H' means on hold, 'R' means recalled.
+                     LOEDT is expiration date in Julian — convert for near-expiry filtering."
+            columns:
+              - name: LOITM
+                metadata:
+                  description: "Short item number — FK to F4101.IMITM."
+              - name: LOMCU
+                metadata:
+                  description: "Branch/plant."
+              - name: LOTN
+                metadata:
+                  description: "Lot number. Composite PK with LOITM+LOMCU."
+              - name: LOLOTS
+                metadata:
+                  description: "Lot status code — controls whether lot can be picked/shipped."
+                  note: "Always filter LOLOTS='A' for available inventory."
+                allowed_values: ["A", "H", "R"]
+              - name: LOMDT
+                metadata:
+                  description: "Manufacturing date (Julian)."
+                  note: "Julian date format CYYDDD."
+              - name: LOEDT
+                metadata:
+                  description: "Expiration date (Julian)."
+                  note: "Julian date — convert for near-expiry alerts. Critical for MedTech compliance."
+              - name: LOSLD
+                metadata:
+                  description: "Sell-by date (Julian)."
+              - name: LOSPT
+                metadata:
+                  description: "Supplier lot number (for inbound traceability)."
+
+          - name: F4111
+            metadata:
+              description: "Item Ledger (Cardex) — every inventory movement in / out of stock.
+                             Full audit trail; used for shipment history and inventory turns."
+              tags: ["inventory", "movement", "audit", "shipment-history", "cardex", "O2C"]
+              note: "ILTRQT is signed — negative = outbound (shipments), positive = inbound (receipts).
+                     Divide by 10000 for quantity. Filter ILDCT='SO' for sales order shipments."
+            columns:
+              - name: ILITM
+                metadata:
+                  description: "Short item number — FK to F4101.IMITM."
+              - name: ILMCU
+                metadata:
+                  description: "Branch/plant."
+              - name: ILDCT
+                metadata:
+                  description: "Document type of the movement (SO shipment, PO receipt, IA adjustment)."
+                  note: "Filter ILDCT='SO' for sales order shipments only."
+              - name: ILDOC
+                metadata:
+                  description: "Document number tied to the movement."
+              - name: ILTRDJ
+                metadata:
+                  description: "Transaction date (Julian)."
+                  note: "Julian date — convert CYYDDD for date range filtering."
+              - name: ILTRQT
+                metadata:
+                  description: "Transaction quantity (raw ÷ 10000, signed)."
+                  note: "Always divide by 10000. Negative = outbound, positive = inbound."
+              - name: ILUNCS
+                metadata:
+                  description: "Unit cost at time of transaction (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: ILLOTN
+                metadata:
+                  description: "Lot number for the movement."
+
+          - name: F4201
+            metadata:
+              description: "Sales Order Header — one row per sales order. Composite key
+                             (SHDOCO + SHDCTO + SHKCOO). Header-level attributes: customer,
+                             dates, currency, hold flag, ship-to."
+              tags: ["sales-order", "header", "customer", "hold", "bookings", "O2C"]
+              note: "SHHOLD non-blank means order is on hold — decode via F0005 SY='42' RT='HC'.
+                     SHNXTR/SHLTTR are activity status codes — decode via F0005 SY='40' RT='AT'.
+                     Always join to F4211 on SHDOCO+SHDCTO+SHKCOO for order lines."
+            columns:
+              - name: SHDOCO
+                metadata:
+                  description: "Document (Order) number. Part of composite PK."
+              - name: SHDCTO
+                metadata:
+                  description: "Order type — SO=Std Sales, SW=Warehouse, SI=Interbranch etc."
+                  note: "Filter SHDCTO='SO' for standard sales orders."
+              - name: SHKCOO
+                metadata:
+                  description: "Order company (document company). Part of composite PK."
+              - name: SHAN8
+                metadata:
+                  description: "Sold-to Address Number — FK to F0101.ABAN8."
+              - name: SHSHAN
+                metadata:
+                  description: "Ship-to Address Number — FK to F0101.ABAN8."
+              - name: SHPA8
+                metadata:
+                  description: "Parent Address Number — for global-account rollups."
+              - name: SHTRDJ
+                metadata:
+                  description: "Order (transaction) date in Julian CYYDDD."
+                  note: "Julian date — convert CYYDDD to calendar date for display and filtering."
+              - name: SHRSDJ
+                metadata:
+                  description: "Requested date (customer requested) in Julian CYYDDD."
+                  note: "Julian date."
+              - name: SHDRQJ
+                metadata:
+                  description: "Scheduled pick / promise date in Julian CYYDDD."
+                  note: "Julian date."
+              - name: SHPDDJ
+                metadata:
+                  description: "Promised delivery date in Julian CYYDDD."
+                  note: "Julian date."
+              - name: SHNXTR
+                metadata:
+                  description: "Next status code (activity rules)."
+                  note: "Decode via F0005 SY='40' RT='AT'."
+              - name: SHLTTR
+                metadata:
+                  description: "Last status code."
+                  note: "Decode via F0005 SY='40' RT='AT'."
+              - name: SHMCU
+                metadata:
+                  description: "Selling business unit — FK to F0006.MCMCU."
+              - name: SHCO
+                metadata:
+                  description: "Company — FK to F0010.CCCO."
+              - name: SHCRCD
+                metadata:
+                  description: "Order currency code."
+              - name: SHCRR
+                metadata:
+                  description: "Currency exchange rate to base currency."
+              - name: SHHOLD
+                metadata:
+                  description: "Hold code — non-blank means order is on hold."
+                  note: "Non-blank = order blocked. Decode via F0005 SY='42' RT='HC'."
+              - name: SHPTC
+                metadata:
+                  description: "Payment terms code for the order."
+
+          - name: F4211
+            metadata:
+              description: "Sales Order Detail — OPEN order lines (not yet fully shipped/invoiced).
+                             One row per SKU per line. Composite key (SDDOCO+SDDCTO+SDKCOO+SDLNID).
+                             Core fact table for backlog and open bookings."
+              tags: ["sales-order", "detail", "open", "backlog", "bookings", "O2C"]
+              note: "SDAEXP is booking amount — divide by 100. SDUORG/SDSOQS are quantities — divide by 10000.
+                     SDUPRC is unit price — divide by 10000. Union with F42119 for complete order picture."
+            columns:
+              - name: SDDOCO
+                metadata:
+                  description: "Order number — FK to F4201.SHDOCO. Part of composite PK."
+              - name: SDDCTO
+                metadata:
+                  description: "Order type — FK to F4201.SHDCTO. Part of composite PK."
+              - name: SDKCOO
+                metadata:
+                  description: "Order company — FK to F4201.SHKCOO. Part of composite PK."
+              - name: SDLNID
+                metadata:
+                  description: "Line number (raw x1000 — divide by 1000 for display). Part of composite PK."
+                  note: "Always divide by 1000 before displaying to users."
+              - name: SDAN8
+                metadata:
+                  description: "Sold-to AN8 (denormalized from header)."
+              - name: SDSHAN
+                metadata:
+                  description: "Ship-to AN8."
+              - name: SDITM
+                metadata:
+                  description: "Short item number — FK to F4101.IMITM."
+              - name: SDLITM
+                metadata:
+                  description: "Second item number / SKU code."
+              - name: SDMCU
+                metadata:
+                  description: "Branch/plant — FK to F0006.MCMCU."
+              - name: SDCO
+                metadata:
+                  description: "Company code."
+              - name: SDTRDJ
+                metadata:
+                  description: "Order date (Julian CYYDDD)."
+                  note: "Julian date — convert for date range filtering."
+              - name: SDPDDJ
+                metadata:
+                  description: "Scheduled pick / promise date (Julian CYYDDD)."
+                  note: "Julian date."
+              - name: SDDRQJ
+                metadata:
+                  description: "Requested date (Julian CYYDDD)."
+                  note: "Julian date."
+              - name: SDADDJ
+                metadata:
+                  description: "Actual ship date (Julian CYYDDD) — populated when shipped."
+                  note: "Julian date — null means not yet shipped."
+              - name: SDIVD
+                metadata:
+                  description: "Invoice date (Julian CYYDDD)."
+                  note: "Julian date — null means not yet invoiced."
+              - name: SDNXTR
+                metadata:
+                  description: "Next status code."
+                  note: "Decode via F0005 SY='40' RT='AT'."
+              - name: SDLTTR
+                metadata:
+                  description: "Last status code."
+                  note: "Decode via F0005 SY='40' RT='AT'."
+              - name: SDUORG
+                metadata:
+                  description: "Order quantity (raw ÷ 10000 for display)."
+                  note: "Always divide by 10000."
+              - name: SDSOQS
+                metadata:
+                  description: "Open / remaining quantity (raw ÷ 10000)."
+                  note: "Always divide by 10000. This is the unfulfilled backlog quantity."
+              - name: SDSOBK
+                metadata:
+                  description: "Backordered quantity (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: SDUPRC
+                metadata:
+                  description: "Unit selling price (raw ÷ 10000)."
+                  note: "Always divide by 10000 to get actual unit price."
+              - name: SDAEXP
+                metadata:
+                  description: "Extended price / booking amount (raw ÷ 100)."
+                  note: "Always divide by 100. Core booking/revenue metric."
+              - name: SDECST
+                metadata:
+                  description: "Extended cost (raw ÷ 100) — for margin analytics."
+                  note: "Always divide by 100. Margin = (SDAEXP - SDECST) ÷ 100 each."
+              - name: SDCRCD
+                metadata:
+                  description: "Transaction currency code."
+              - name: SDCRR
+                metadata:
+                  description: "Exchange rate to base currency."
+              - name: SDLOTN
+                metadata:
+                  description: "Lot number — MedTech traceability."
+              - name: SDLOCN
+                metadata:
+                  description: "Location within the branch (bin/aisle)."
+
+          - name: F49211
+            metadata:
+              description: "Sales Order Detail Ledger (History Log) — every status change or edit
+                             made to an order line. Audit trail for order lifecycle analytics."
+              tags: ["sales-order", "audit", "lifecycle", "status-change", "O2C"]
+            columns:
+              - name: LGDOCO
+                metadata:
+                  description: "Order number — FK to F4201.SHDOCO."
+              - name: LGDCTO
+                metadata:
+                  description: "Order type."
+              - name: LGKCOO
+                metadata:
+                  description: "Order company."
+              - name: LGLNID
+                metadata:
+                  description: "Line number."
+              - name: LGTRDJ
+                metadata:
+                  description: "Date of the status change / edit (Julian)."
+                  note: "Julian date."
+              - name: LGNXTR
+                metadata:
+                  description: "New status the line moved into."
+                  note: "Decode via F0005 SY='40' RT='AT'."
+              - name: LGLTTR
+                metadata:
+                  description: "Previous status."
+                  note: "Decode via F0005 SY='40' RT='AT'."
+              - name: LGUSER
+                metadata:
+                  description: "User ID that made the change."
+
+          - name: F4209
+            metadata:
+              description: "Sales Order Header Text — free-text header memos / instructions on the order."
+              tags: ["sales-order", "text", "memo", "instructions", "O2C"]
+            columns:
+              - name: OTDOCO
+                metadata:
+                  description: "Order number."
+              - name: OTDCTO
+                metadata:
+                  description: "Order type."
+              - name: OTKCOO
+                metadata:
+                  description: "Order company."
+              - name: OTLNID
+                metadata:
+                  description: "Text line number."
+              - name: OTREMK
+                metadata:
+                  description: "Text/remark content."
+
+          - name: F4611
+            metadata:
+              description: "Warehouse Suggestion / Pick — pick instructions generated by the warehouse
+                             management module for each order line."
+              tags: ["warehouse", "pick", "WMS", "fulfillment", "O2C"]
+            columns:
+              - name: WSDOCO
+                metadata:
+                  description: "Order number."
+              - name: WSDCTO
+                metadata:
+                  description: "Order type."
+              - name: WSKCOO
+                metadata:
+                  description: "Order company."
+              - name: WSLNID
+                metadata:
+                  description: "Order line number."
+              - name: WSITM
+                metadata:
+                  description: "Short item number to be picked."
+              - name: WSMCU
+                metadata:
+                  description: "Branch/plant of the pick."
+              - name: WSLOCN
+                metadata:
+                  description: "Pick location (bin/aisle)."
+              - name: WSLOTN
+                metadata:
+                  description: "Lot to be picked."
+              - name: WSQTY
+                metadata:
+                  description: "Suggested pick quantity (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: WSSTAT
+                metadata:
+                  description: "Pick status — suggested, confirmed, cancelled."
+                allowed_values: ["suggested", "confirmed", "cancelled"]
+
+          - name: F4620
+            metadata:
+              description: "Warehouse Request Header — the request that triggered pick suggestions in F4611."
+              tags: ["warehouse", "request", "WMS", "O2C"]
+            columns:
+              - name: WRDOCO
+                metadata:
+                  description: "Warehouse request document number. Primary key."
+              - name: WRDCTO
+                metadata:
+                  description: "Warehouse request document type."
+              - name: WRKCOO
+                metadata:
+                  description: "Request company."
+              - name: WRSOOR
+                metadata:
+                  description: "Originating sales order number."
+              - name: WRSTAT
+                metadata:
+                  description: "Request status."
+              - name: WRTRDJ
+                metadata:
+                  description: "Request date (Julian)."
+                  note: "Julian date."
+ 
+          - name: F4941
+            metadata:
+              description: "Shipment Routing Steps — origin → destination legs for a shipment.
+                             Enables in-transit visibility analytics."
+              tags: ["shipment", "routing", "legs", "in-transit", "O2C"]
+            columns:
+              - name: SRSHPN
+                metadata:
+                  description: "Shipment number — FK to F4915.SHPN."
+              - name: SRSTP
+                metadata:
+                  description: "Sequence step number."
+              - name: SROMCU
+                metadata:
+                  description: "Origin business unit."
+              - name: SRDMCU
+                metadata:
+                  description: "Destination business unit."
+              - name: SRCARS
+                metadata:
+                  description: "Carrier for this leg (AN8)."
+              - name: SRSTATUS
+                metadata:
+                  description: "Leg status."
+
+          - name: F4943
+            metadata:
+              description: "Delivery Document Detail — packing slip / bill-of-lading data
+                             per shipment line."
+              tags: ["delivery", "packing-slip", "BOL", "shipment", "O2C"]
+            columns:
+              - name: DDSHPN
+                metadata:
+                  description: "Shipment number — FK to F4915.SHPN."
+              - name: DDDOCO
+                metadata:
+                  description: "Sales order number tied to this delivery."
+              - name: DDLNID
+                metadata:
+                  description: "Sales order line number."
+              - name: DDITM
+                metadata:
+                  description: "Short item number."
+              - name: DDQTY
+                metadata:
+                  description: "Delivered quantity (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: DDLOTN
+                metadata:
+                  description: "Lot number delivered."
+
+          - name: F49490
+            metadata:
+              description: "Sales Update Header (R42800 batch) — batch header for the invoicing
+                             run that promotes shipped orders to invoiced."
+              tags: ["invoicing", "batch", "R42800", "O2C"]
+            columns:
+              - name: SUEDBT
+                metadata:
+                  description: "Batch number. Primary key."
+              - name: SUEDTN
+                metadata:
+                  description: "Batch date (Julian)."
+                  note: "Julian date."
+              - name: SUEDUS
+                metadata:
+                  description: "User who ran the batch."
+              - name: SUEDST
+                metadata:
+                  description: "Batch status."
+              - name: SUCO
+                metadata:
+                  description: "Company code the batch runs for."
+
+          
+          - name: F42565
+            metadata:
+              description: "Print Invoice Workfile — what actually printed on customer invoices
+                             (formatted line data)."
+              tags: ["invoice", "print", "O2C"]
+              note: "IWAEXP is printed amount — divide by 100."
+            columns:
+              - name: IWDOCO
+                metadata:
+                  description: "Invoice document number."
+              - name: IWKCOO
+                metadata:
+                  description: "Company."
+              - name: IWLNID
+                metadata:
+                  description: "Invoice line number."
+              - name: IWITM
+                metadata:
+                  description: "Item number."
+              - name: IWDSC1
+                metadata:
+                  description: "Description printed on invoice."
+              - name: IWAEXP
+                metadata:
+                  description: "Extended amount printed (raw ÷ 100)."
+                  note: "Always divide by 100."
+
+          - name: F03B11
+            metadata:
+              description: "Customer Ledger (AR Invoices) — one row per open invoice or debit memo.
+                             Central table for DSO, aging and open-AR analytics."
+              tags: ["AR", "invoice", "DSO", "aging", "open-AR", "customer-ledger", "O2C"]
+              note: "RPAG is gross amount, RPAAP is open amount — both divide by 100.
+                     RPPYST='P' means paid. For aging bucket by (TODAY - RPDDJ) converted from Julian."
+            columns:
+              - name: RPDOC
+                metadata:
+                  description: "Invoice document number. Part of composite PK."
+              - name: RPDCT
+                metadata:
+                  description: "Invoice document type (RI=Invoice, RM=Debit Memo, RR=Recurring)."
+                allowed_values: ["RI", "RM", "RR"]
+              - name: RPKCO
+                metadata:
+                  description: "Document company. Part of composite PK."
+              - name: RPSFX
+                metadata:
+                  description: "Pay-item suffix (for split invoices)."
+              - name: RPAN8
+                metadata:
+                  description: "Customer AN8 — FK to F0101.ABAN8."
+              - name: RPCO
+                metadata:
+                  description: "Company code."
+              - name: RPDIVJ
+                metadata:
+                  description: "Invoice date (Julian)."
+                  note: "Julian date."
+              - name: RPDGJ
+                metadata:
+                  description: "GL date (Julian) — controls period."
+                  note: "Julian date — determines fiscal period for GL posting."
+              - name: RPDDJ
+                metadata:
+                  description: "Due date (Julian)."
+                  note: "Julian date — use for aging calculation: bucket by days past due."
+              - name: RPAG
+                metadata:
+                  description: "Gross invoice amount (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RPAAP
+                metadata:
+                  description: "Open (unpaid) amount (raw ÷ 100)."
+                  note: "Always divide by 100. Zero = fully paid. Core open AR metric."
+              - name: RPADSC
+                metadata:
+                  description: "Discount taken (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RPPOST
+                metadata:
+                  description: "Posted flag — 'P' = posted to GL."
+                allowed_values: ["P", " "]
+              - name: RPCRCD
+                metadata:
+                  description: "Transaction currency."
+              - name: RPPTC
+                metadata:
+                  description: "Payment terms code."
+              - name: RPPYST
+                metadata:
+                  description: "Pay status — A=approved, H=hold, P=paid."
+                  note: "Filter RPPYST != 'P' for open unpaid invoices."
+                allowed_values: ["A", "H", "P"]
+
+          - name: F03B112
+            metadata:
+              description: "Invoice Revisions — audit trail of changes to F03B11 invoices
+                             (adjustments, revalues, chargebacks)."
+              tags: ["AR", "invoice", "revision", "audit", "O2C"]
+            columns:
+              - name: RVDOC
+                metadata:
+                  description: "Invoice document number."
+              - name: RVDCT
+                metadata:
+                  description: "Invoice document type."
+              - name: RVKCO
+                metadata:
+                  description: "Document company."
+              - name: RVREV
+                metadata:
+                  description: "Revision number."
+              - name: RVDGJ
+                metadata:
+                  description: "Revision GL date."
+                  note: "Julian date."
+              - name: RVAG
+                metadata:
+                  description: "Revised gross amount (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RVUSER
+                metadata:
+                  description: "User who made the revision."
+
+          - name: F03B13
+            metadata:
+              description: "Receipts Header — cash-receipt / lockbox batch header.
+                             One row per customer payment received."
+              tags: ["AR", "receipt", "payment", "cash", "lockbox", "O2C"]
+              note: "RYCKAM is payment amount — divide by 100. RYPOST='P' means posted to GL."
+            columns:
+              - name: RYPYID
+                metadata:
+                  description: "Payment ID — unique receipt identifier. Primary key."
+              - name: RYCKNU
+                metadata:
+                  description: "Customer check / reference number."
+              - name: RYAN8
+                metadata:
+                  description: "Customer AN8 — FK to F0101.ABAN8."
+              - name: RYCO
+                metadata:
+                  description: "Company receiving the payment."
+              - name: RYGLBA
+                metadata:
+                  description: "Bank GL account (F0901.AID)."
+              - name: RYCKAM
+                metadata:
+                  description: "Check / payment amount (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RYDMTJ
+                metadata:
+                  description: "Deposit date (Julian)."
+                  note: "Julian date."
+              - name: RYDGJ
+                metadata:
+                  description: "GL date (Julian) for posting."
+                  note: "Julian date."
+              - name: RYCRCD
+                metadata:
+                  description: "Payment currency."
+              - name: RYPOST
+                metadata:
+                  description: "Posted flag — 'D'=drafted, 'P'=posted."
+                allowed_values: ["D", "P"]
+
+          - name: F03B14
+            metadata:
+              description: "Receipts Detail (Applied) — which invoice(s) each receipt was applied to.
+                             Detail rows sum to F03B13 header."
+              tags: ["AR", "receipt", "applied", "payment-application", "O2C"]
+              note: "RZPAAP is amount applied — divide by 100. Join to F03B11 on RZDOC+RZDCT+RZKCO."
+            columns:
+              - name: RZPYID
+                metadata:
+                  description: "Payment ID — FK to F03B13.RYPYID."
+              - name: RZDOC
+                metadata:
+                  description: "Invoice doc number the payment applied to — FK to F03B11.RPDOC."
+              - name: RZDCT
+                metadata:
+                  description: "Invoice doc type."
+              - name: RZKCO
+                metadata:
+                  description: "Invoice company."
+              - name: RZSFX
+                metadata:
+                  description: "Invoice pay-item suffix."
+              - name: RZPAAP
+                metadata:
+                  description: "Amount applied to this invoice (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RZADSC
+                metadata:
+                  description: "Discount taken (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RZAWO
+                metadata:
+                  description: "Amount written off (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RZAN8
+                metadata:
+                  description: "Customer AN8."
+              - name: RZDGJ
+                metadata:
+                  description: "GL date for the application (Julian)."
+                  note: "Julian date."
+
+          
+          - name: F03B20
+            metadata:
+              description: "AR Statement File — customer statement runs
+                             (invoices grouped by statement)."
+              tags: ["AR", "statement", "customer", "O2C"]
+            columns:
+              - name: STDOC
+                metadata:
+                  description: "Statement number."
+              - name: STAN8
+                metadata:
+                  description: "Customer AN8."
+              - name: STCO
+                metadata:
+                  description: "Company."
+              - name: STSTDT
+                metadata:
+                  description: "Statement date (Julian)."
+                  note: "Julian date."
+              - name: STAG
+                metadata:
+                  description: "Total statement amount (raw ÷ 100)."
+                  note: "Always divide by 100."
+
+          - name: F03B21
+            metadata:
+              description: "AR Notes / Activity Log — collections notes, dispute reasons,
+                             promised-to-pay records per invoice."
+              tags: ["AR", "collections", "notes", "dispute", "promise-to-pay", "O2C"]
+            columns:
+              - name: APDOC
+                metadata:
+                  description: "Invoice document number — FK to F03B11.RPDOC."
+              - name: APDCT
+                metadata:
+                  description: "Invoice document type."
+              - name: APKCO
+                metadata:
+                  description: "Invoice company."
+              - name: APAN8
+                metadata:
+                  description: "Customer AN8."
+              - name: APACTB
+                metadata:
+                  description: "Activity type (call, note, promise-to-pay)."
+              - name: APREMK
+                metadata:
+                  description: "Free-text remarks / notes."
+              - name: APACTU
+                metadata:
+                  description: "Activity date (Julian)."
+                  note: "Julian date."
+              - name: APUSER
+                metadata:
+                  description: "User who logged the activity."
+
+          - name: F03B40
+            metadata:
+              description: "AR Fee and Interest Invoice — automatically-generated late-payment
+                             fees / interest charges."
+              tags: ["AR", "late-payment", "interest", "fee", "O2C"]
+            columns:
+              - name: FIDOC
+                metadata:
+                  description: "Fee/interest invoice number."
+              - name: FIDCT
+                metadata:
+                  description: "Document type (RF)."
+              - name: FIKCO
+                metadata:
+                  description: "Company."
+              - name: FIAN8
+                metadata:
+                  description: "Customer AN8."
+              - name: FIAG
+                metadata:
+                  description: "Fee amount (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: FIDGJ
+                metadata:
+                  description: "GL date."
+                  note: "Julian date."
+
+          - name: F03B41
+            metadata:
+              description: "Draft / Bill of Exchange — draft receipts common in Europe / APAC
+                             (customer accepts a draft rather than paying cash immediately)."
+              tags: ["AR", "draft", "bill-of-exchange", "APAC", "Europe", "O2C"]
+            columns:
+              - name: DRDOC
+                metadata:
+                  description: "Draft document number."
+              - name: DRDCT
+                metadata:
+                  description: "Draft document type."
+              - name: DRKCO
+                metadata:
+                  description: "Company."
+              - name: DRAN8
+                metadata:
+                  description: "Customer AN8."
+              - name: DRAG
+                metadata:
+                  description: "Draft amount (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: DRDDJ
+                metadata:
+                  description: "Draft due date (Julian)."
+                  note: "Julian date."
+              - name: DRSTAT
+                metadata:
+                  description: "Draft status (accepted, remitted, collected)."
+                allowed_values: ["accepted", "remitted", "collected"]
+
+          - name: F03B15
+            metadata:
+              description: "Credit / Cash Management Constants — credit rules and thresholds
+                             (aging days, credit-limit tolerance) per company."
+              tags: ["AR", "credit", "aging", "cash-management", "O2C"]
+            columns:
+              - name: CMKCO
+                metadata:
+                  description: "Company code."
+              - name: CMHDAR
+                metadata:
+                  description: "Default AR hold code applied on credit failure."
+              - name: CMAGE1
+                metadata:
+                  description: "Aging bucket 1 boundary (days)."
+              - name: CMAGE2
+                metadata:
+                  description: "Aging bucket 2 boundary (days)."
+              - name: CMAGE3
+                metadata:
+                  description: "Aging bucket 3 boundary (days)."
+              - name: CMCTOL
+                metadata:
+                  description: "Credit-limit tolerance (%)."
+
+          - name: F0911
+            metadata:
+              description: "Account Ledger — the GL journal. Every posted transaction line
+                             (revenue, COGS, AR, cash, tax) lives here. Used for revenue recognition,
+                             GL reconciliation and financial reporting."
+              tags: ["GL", "journal", "revenue", "COGS", "AR", "financial-reporting", "O2C"]
+              note: "GLAA is posting amount — divide by 100. Signed: positive=DR, negative=CR.
+                     GLPOST='P' means posted. Filter by GLDGJ for fiscal period."
+            columns:
+              - name: GLKCO
+                metadata:
+                  description: "Document company. Part of the JDE GL key."
+              - name: GLDCT
+                metadata:
+                  description: "Document type of the journal entry."
+              - name: GLDOC
+                metadata:
+                  description: "Document number of the journal entry."
+              - name: GLDGJ
+                metadata:
+                  description: "GL date (Julian) — determines fiscal period."
+                  note: "Julian date — convert CYYDDD for period filtering."
+              - name: GLCO
+                metadata:
+                  description: "Company code — FK to F0010.CCCO."
+              - name: GLAID
+                metadata:
+                  description: "Account ID (short account) — FK to F0901.AID."
+              - name: GLOBJ
+                metadata:
+                  description: "Object account (natural account code)."
+              - name: GLSUB
+                metadata:
+                  description: "Subsidiary account (sub-object)."
+              - name: GLMCU
+                metadata:
+                  description: "Business unit — FK to F0006.MCMCU."
+              - name: GLAA
+                metadata:
+                  description: "Posting amount (raw ÷ 100). Signed — DR positive / CR negative."
+                  note: "Always divide by 100. Check sign convention before aggregating."
+              - name: GLU
+                metadata:
+                  description: "Units (statistical quantity)."
+              - name: GLPOST
+                metadata:
+                  description: "Posted flag — 'P' = posted."
+                allowed_values: ["P", " "]
+              - name: GLCRCD
+                metadata:
+                  description: "Transaction currency."
+              - name: GLCRR
+                metadata:
+                  description: "Exchange rate to base currency."
+              - name: GLAN8
+                metadata:
+                  description: "Address Number (customer/supplier) if tied to a sub-ledger."
+              - name: GLEXR1
+                metadata:
+                  description: "Explanation / description on the JE line."
+
+          - name: F0902
+            metadata:
+              description: "Account Balances — period-end summarised balances per account, company,
+                             business unit, fiscal year and period. Used for trial balance and
+                             financial reporting."
+              tags: ["GL", "balances", "period-end", "trial-balance", "financial-reporting", "O2C"]
+              note: "GBAN01..GBAN14 are period net postings — divide by 100.
+                     GBLT='AA' for actual, 'BA' for budget, 'CA' for foreign currency."
+            columns:
+              - name: GBAID
+                metadata:
+                  description: "Account ID — FK to F0901.AID."
+              - name: GBCO
+                metadata:
+                  description: "Company code."
+              - name: GBMCU
+                metadata:
+                  description: "Business unit."
+              - name: GBFY
+                metadata:
+                  description: "Fiscal year."
+              - name: GBLT
+                metadata:
+                  description: "Ledger type (AA=Actual, BA=Budget, CA=Foreign currency)."
+                allowed_values: ["AA", "BA", "CA"]
+              - name: GBAPYC
+                metadata:
+                  description: "Prior-year cumulative balance (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: GBAN01
+                metadata:
+                  description: "Period 1 net posting (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: GBAN02
+                metadata:
+                  description: "Period 2 net posting (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: GBAN03
+                metadata:
+                  description: "Period 3 net posting (raw ÷ 100). Columns continue GBAN04..GBAN14."
+                  note: "Always divide by 100. Same pattern applies to GBAN04 through GBAN14."
+
+          - name: F0901
+            metadata:
+              description: "Account Master — chart of accounts. One row per GL account
+                             (revenue, AR, cash, COGS, tax etc.)."
+              tags: ["GL", "chart-of-accounts", "account-master", "financial-reporting", "O2C"]
+            columns:
+              - name: GMAID
+                metadata:
+                  description: "Short account ID. Primary key."
+              - name: GMCO
+                metadata:
+                  description: "Company code."
+              - name: GMMCU
+                metadata:
+                  description: "Business unit."
+              - name: GMOBJ
+                metadata:
+                  description: "Object account (natural account)."
+              - name: GMSUB
+                metadata:
+                  description: "Subsidiary account."
+              - name: GMDL01
+                metadata:
+                  description: "Account description."
+              - name: GMPEC
+                metadata:
+                  description: "Posting edit code (P=posting, N=non-posting header)."
+                allowed_values: ["P", "N"]
+              - name: GMLDA
+                metadata:
+                  description: "Level of detail (1-9) — controls report rollups."
+              - name: GMBCRC
+                metadata:
+                  description: "Base currency of the account."
+
+          - name: F0013
+            metadata:
+              description: "Currency Codes — master list of currencies with implicit decimals
+                             and description."
+              tags: ["currency", "FX", "master", "O2C"]
+              note: "CCCDEC gives implied decimals — USD=2 (divide by 100), JPY=0 (no division)."
+            columns:
+              - name: CCCRCD
+                metadata:
+                  description: "Currency code (ISO 4217). Primary key."
+              - name: CCDL01
+                metadata:
+                  description: "Currency description."
+              - name: CCCDEC
+                metadata:
+                  description: "Number of decimals implied in stored amounts (e.g. 2 for USD → divide by 100)."
+                  note: "Critical — always check this before dividing stored amounts for a given currency."
+
+          - name: F0015
+            metadata:
+              description: "Currency Exchange Rates — daily FX rates between currency pairs.
+                             Used to translate transaction amounts to base currency."
+              tags: ["currency", "FX", "exchange-rate", "O2C"]
+              note: "CXMETH='M' means multiply by CXCRR, 'D' means divide by CXCRRD.
+                     Always filter by CXEFT date range for correct rate."
+            columns:
+              - name: CXCRCD
+                metadata:
+                  description: "From-currency code."
+              - name: CXCRDC
+                metadata:
+                  description: "To-currency code."
+              - name: CXEFT
+                metadata:
+                  description: "Effective-from Julian date."
+                  note: "Julian date — filter for rate effective on transaction date."
+              - name: CXCRR
+                metadata:
+                  description: "Exchange rate multiplier."
+              - name: CXCRRD
+                metadata:
+                  description: "Exchange rate divisor."
+              - name: CXMETH
+                metadata:
+                  description: "Rate method (M=multiplier, D=divisor)."
+                allowed_values: ["M", "D"]
+
+          - name: F00092
+            metadata:
+              description: "Tag File / Address Book Category Codes — extended attributes for AB records
+                             (categorization beyond ABAC01..ABAC03)."
+              tags: ["address-book", "category", "tags", "O2C"]
+            columns:
+              - name: TGAN8
+                metadata:
+                  description: "Address Number — FK to F0101.ABAN8."
+              - name: TGSY
+                metadata:
+                  description: "Product code for the tag."
+              - name: TGRT
+                metadata:
+                  description: "Record type for the tag."
+              - name: TGKY
+                metadata:
+                  description: "Tag key value."
+              - name: TGDL01
+                metadata:
+                  description: "Description."
+
+          - name: F0411
+            metadata:
+              description: "Accounts Payable Ledger (Supplier Ledger) — one row per voucher pay-item.
+                             Central sub-ledger for AP: gross amount, open amount, tax, hold, GL date
+                             and posted flag. Reconciles to F0911 AP trade account."
+              tags: ["AP", "voucher", "supplier", "payment", "sub-ledger", "O2C"]
+              note: "RPAG is gross, RPAAP is open amount — both divide by 100.
+                     RPPYST='P' means paid. RPHDPY non-blank means payment blocked."
+            columns:
+              - name: RPKCO
+                metadata:
+                  description: "Document company. Part of composite PK."
+              - name: RPDCT
+                metadata:
+                  description: "Voucher document type — PV, PD, PL, PM, PR, PE etc."
+                allowed_values: ["PV", "PD", "PL", "PM", "PR", "PE"]
+              - name: RPDOC
+                metadata:
+                  description: "Voucher document number. Part of composite PK."
+              - name: RPSFX
+                metadata:
+                  description: "Pay-item suffix — differentiates split pay-items of the same voucher."
+              - name: RPAN8
+                metadata:
+                  description: "Supplier AN8 — FK to F0101.ABAN8."
+              - name: RPCO
+                metadata:
+                  description: "Company code — FK to F0010.CCCO."
+              - name: RPDIVJ
+                metadata:
+                  description: "Invoice date (Julian CYYDDD) — supplier invoice date."
+                  note: "Julian date."
+              - name: RPDGJ
+                metadata:
+                  description: "GL date (Julian) — controls fiscal period."
+                  note: "Julian date."
+              - name: RPDDJ
+                metadata:
+                  description: "Due date (Julian) — used for AP aging and payment scheduling."
+                  note: "Julian date."
+              - name: RPDSVJ
+                metadata:
+                  description: "Service/tax date (Julian)."
+                  note: "Julian date."
+              - name: RPAG
+                metadata:
+                  description: "Gross voucher amount (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RPAAP
+                metadata:
+                  description: "Open (unpaid) amount (raw ÷ 100) — becomes 0 when fully paid."
+                  note: "Always divide by 100. Zero = fully paid."
+              - name: RPADSC
+                metadata:
+                  description: "Discount available (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RPATXA
+                metadata:
+                  description: "Taxable amount (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RPSTAM
+                metadata:
+                  description: "Tax amount (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RPPOST
+                metadata:
+                  description: "Posted flag — 'P' = posted to GL; blank / 'D' = not posted."
+                allowed_values: ["P", "D", " "]
+              - name: RPPYST
+                metadata:
+                  description: "Pay status — A=approved, H=hold, P=paid, %=paid with discount."
+                allowed_values: ["A", "H", "P", "%"]
+              - name: RPHDPY
+                metadata:
+                  description: "Hold-payment code — non-blank blocks disbursement."
+                  note: "Non-blank = payment blocked. Must be cleared before payment runs."
+              - name: RPPTC
+                metadata:
+                  description: "Payment terms code."
+              - name: RPCRCD
+                metadata:
+                  description: "Transaction currency."
+              - name: RPCRR
+                metadata:
+                  description: "Exchange rate to base currency."
+              - name: RPVINV
+                metadata:
+                  description: "Supplier's original invoice number (external reference)."
+              - name: RPPYE
+                metadata:
+                  description: "Payee AN8 — where the payment is directed (may differ from RPAN8)."
+              - name: RPMCU
+                metadata:
+                  description: "Business unit — FK to F0006.MCMCU."
+
+          - name: F0414
+            metadata:
+              description: "A/P Matching Document Detail (Payment Details) — one row per voucher
+                             pay-item cleared by a payment. Links payments in F0413 back to
+                             vouchers in F0411. Core table for cash-out reconciliation."
+              tags: ["AP", "payment", "matching", "reconciliation", "O2C"]
+              note: "RNPAAP is amount applied — divide by 100. Join to F0411 on RNDOCM+RNDCTM+RNKCOM+RNSFXM."
+            columns:
+              - name: RNPYID
+                metadata:
+                  description: "Payment ID — unique identifier for the payment; FK to F0413.RMPYID."
+              - name: RNKCO
+                metadata:
+                  description: "Payment document company. Part of composite PK."
+              - name: RNDCT
+                metadata:
+                  description: "Payment document type — PK (check), PN (EFT), PT (wire), PP (auto-payment)."
+                allowed_values: ["PK", "PN", "PT", "PP"]
+              - name: RNDOC
+                metadata:
+                  description: "Payment document number."
+              - name: RNDCTM
+                metadata:
+                  description: "Matched (voucher) document type — the voucher DCT being paid."
+              - name: RNDOCM
+                metadata:
+                  description: "Matched voucher document number — FK to F0411.RPDOC."
+              - name: RNKCOM
+                metadata:
+                  description: "Matched voucher company — FK to F0411.RPKCO."
+              - name: RNSFXM
+                metadata:
+                  description: "Matched pay-item suffix — FK to F0411.RPSFX."
+              - name: RNAN8
+                metadata:
+                  description: "Supplier AN8 the payment was made to."
+              - name: RNPYE
+                metadata:
+                  description: "Payee AN8 (may differ if payment redirected)."
+              - name: RNCO
+                metadata:
+                  description: "Company code — FK to F0010.CCCO."
+              - name: RNDGJ
+                metadata:
+                  description: "GL date of the payment application (Julian)."
+                  note: "Julian date."
+              - name: RNDMTJ
+                metadata:
+                  description: "Payment/check date (Julian)."
+                  note: "Julian date."
+              - name: RNPAAP
+                metadata:
+                  description: "Amount applied to the voucher (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RNADSC
+                metadata:
+                  description: "Discount taken (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RNAWO
+                metadata:
+                  description: "Amount written off / short-pay (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: RNCRCD
+                metadata:
+                  description: "Payment currency."
+              - name: RNCRR
+                metadata:
+                  description: "Exchange rate at payment date."
+              - name: RNGLBA
+                metadata:
+                  description: "Bank GL account (from F0901.AID) — where cash was drawn."
+              - name: RNPOST
+                metadata:
+                  description: "Posted flag — 'P' = payment posted to GL."
+                allowed_values: ["P", " "]
+              - name: RNCKNU
+                metadata:
+                  description: "Check / EFT reference number."
+
+          - name: F42199
+            metadata:
+              description: "Sales Order Detail Ledger File — historical audit ledger capturing every
+                             state of a sales order line through its lifecycle. Powers order lifecycle
+                             and status-transition analytics."
+              tags: ["sales-order", "audit", "lifecycle", "history", "O2C"]
+              note: "SLNXTR and SLLTTR enable state-transition queries.
+                     SLUPMJ is row-written date. SLPID identifies which JDE program wrote the row."
+            columns:
+              - name: SLDOCO
+                metadata:
+                  description: "Order number — FK to F4201.SHDOCO. Part of composite PK."
+              - name: SLDCTO
+                metadata:
+                  description: "Order type. Part of composite PK."
+              - name: SLKCOO
+                metadata:
+                  description: "Order company. Part of composite PK."
+              - name: SLLNID
+                metadata:
+                  description: "Line number (raw x1000)."
+                  note: "Divide by 1000 for display."
+              - name: SLAN8
+                metadata:
+                  description: "Sold-to AN8."
+              - name: SLSHAN
+                metadata:
+                  description: "Ship-to AN8."
+              - name: SLITM
+                metadata:
+                  description: "Short item number — FK to F4101.IMITM."
+              - name: SLLITM
+                metadata:
+                  description: "Second item number / SKU code."
+              - name: SLMCU
+                metadata:
+                  description: "Branch/plant — FK to F0006.MCMCU."
+              - name: SLCO
+                metadata:
+                  description: "Company code."
+              - name: SLTRDJ
+                metadata:
+                  description: "Order date at time of activity (Julian)."
+                  note: "Julian date."
+              - name: SLPDDJ
+                metadata:
+                  description: "Promise date at time of activity (Julian)."
+                  note: "Julian date."
+              - name: SLADDJ
+                metadata:
+                  description: "Actual ship date (Julian) — non-blank when shipped."
+                  note: "Julian date."
+              - name: SLIVD
+                metadata:
+                  description: "Invoice date (Julian) — non-blank when invoiced."
+                  note: "Julian date."
+              - name: SLNXTR
+                metadata:
+                  description: "Next status code at this snapshot."
+                  note: "Decode via F0005 SY='40' RT='AT'. Enables state-transition queries."
+              - name: SLLTTR
+                metadata:
+                  description: "Prior status code before this row was written."
+                  note: "Decode via F0005 SY='40' RT='AT'."
+              - name: SLUORG
+                metadata:
+                  description: "Ordered quantity at this snapshot (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: SLSOQS
+                metadata:
+                  description: "Open quantity at this snapshot (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: SLUPRC
+                metadata:
+                  description: "Unit price (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: SLAEXP
+                metadata:
+                  description: "Extended price (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: SLECST
+                metadata:
+                  description: "Extended cost (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: SLCRCD
+                metadata:
+                  description: "Currency code."
+              - name: SLLOTN
+                metadata:
+                  description: "Lot number involved in this activity."
+              - name: SLUSER
+                metadata:
+                  description: "User ID that triggered the activity."
+              - name: SLPID
+                metadata:
+                  description: "Program ID that wrote the row (P4210, P42565, R42800 etc.)."
+              - name: SLUPMJ
+                metadata:
+                  description: "Row-written date (Julian)."
+                  note: "Julian date."
+              - name: SLTDAY
+                metadata:
+                  description: "Row-written time (HHMMSS)."
+
+          - name: F4215
+            metadata:
+              description: "Shipment Header — one row per outbound shipment created from sales orders.
+                             Ties orders to carrier, mode, tracking and delivery dates.
+                             Key table for OTIF calculation."
+              tags: ["shipment", "OTIF", "carrier", "delivery", "outbound", "O2C"]
+              note: "SHACDT is actual delivery date — compare to SHPPDT for OTIF.
+                     SHFRCH is freight charge — divide by 100.
+                     Baxter-specific — confirm with JDE team if equivalent to F4915."
+            columns:
+              - name: SHSHPN
+                metadata:
+                  description: "Shipment number. Primary key."
+              - name: SHKCOO
+                metadata:
+                  description: "Shipment company."
+              - name: SHDCTO
+                metadata:
+                  description: "Shipment document type."
+              - name: SHMCU
+                metadata:
+                  description: "Origin business unit / warehouse — FK to F0006.MCMCU."
+              - name: SHDMCU
+                metadata:
+                  description: "Destination business unit (if internal)."
+              - name: SHSHAN
+                metadata:
+                  description: "Ship-to Address Number — FK to F0101.ABAN8."
+              - name: SHCARS
+                metadata:
+                  description: "Carrier AN8 (which carrier is moving the shipment)."
+              - name: SHMOT
+                metadata:
+                  description: "Mode of transport — truck, air, ocean, parcel."
+              - name: SHSTAT
+                metadata:
+                  description: "Shipment status — planned, released, shipped, delivered."
+                allowed_values: ["planned", "released", "shipped", "delivered"]
+              - name: SHPPDT
+                metadata:
+                  description: "Promised (planned) delivery date (Julian)."
+                  note: "Julian date — use as denominator in OTIF calculation."
+              - name: SHACDT
+                metadata:
+                  description: "Actual delivery date (Julian) — enables OTIF calculation."
+                  note: "Julian date — compare to SHPPDT. On-time if SHACDT <= SHPPDT."
+              - name: SHSCDJ
+                metadata:
+                  description: "Scheduled ship date (Julian)."
+                  note: "Julian date."
+              - name: SHASDJ
+                metadata:
+                  description: "Actual ship date (Julian)."
+                  note: "Julian date."
+              - name: SHTRKN
+                metadata:
+                  description: "Carrier tracking / air-waybill number."
+              - name: SHFRCH
+                metadata:
+                  description: "Freight charge (raw ÷ 100)."
+                  note: "Always divide by 100."
+              - name: SHCRCD
+                metadata:
+                  description: "Shipment currency."
+              - name: SHWGT
+                metadata:
+                  description: "Total shipment weight (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: SHVOL
+                metadata:
+                  description: "Total shipment volume (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+
+          - name: F4942
+            metadata:
+              description: "Shipment Detail (Shipment Pieces) — line-level detail for shipments
+                             in F4215/F4915. Ties each SKU / lot / quantity to its shipment.
+                             Powers OTIF, fill-rate and traceability analytics."
+              tags: ["shipment", "detail", "OTIF", "fill-rate", "traceability", "lot", "O2C"]
+              note: "SDSHPQ is quantity shipped — divide by 10000.
+                     Fill rate = SDSHPQ / SDSQOR per line."
+            columns:
+              - name: SDSHPN
+                metadata:
+                  description: "Shipment number — FK to F4215.SHSHPN (or F4915.SHPN)."
+              - name: SDDOCO
+                metadata:
+                  description: "Sales order number this shipment line satisfies."
+              - name: SDDCTO
+                metadata:
+                  description: "Sales order document type."
+              - name: SDKCOO
+                metadata:
+                  description: "Sales order company."
+              - name: SDLNID
+                metadata:
+                  description: "Sales order line number (raw x1000)."
+                  note: "Divide by 1000 for display."
+              - name: SDPCNO
+                metadata:
+                  description: "Piece number within the shipment (sequence)."
+              - name: SDITM
+                metadata:
+                  description: "Short item number — FK to F4101.IMITM."
+              - name: SDLITM
+                metadata:
+                  description: "Second item number / SKU."
+              - name: SDMCU
+                metadata:
+                  description: "Ship-from branch/plant — FK to F0006.MCMCU."
+              - name: SDLOCN
+                metadata:
+                  description: "Location within the branch (bin / aisle)."
+              - name: SDLOTN
+                metadata:
+                  description: "Lot number shipped — MedTech traceability."
+              - name: SDSQOR
+                metadata:
+                  description: "Quantity ordered (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: SDSHPQ
+                metadata:
+                  description: "Quantity actually shipped (raw ÷ 10000)."
+                  note: "Always divide by 10000. Fill rate = SDSHPQ / SDSQOR."
+              - name: SDUOM
+                metadata:
+                  description: "Unit of measure for the quantity."
+              - name: SDPWGT
+                metadata:
+                  description: "Piece weight (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: SDPVOL
+                metadata:
+                  description: "Piece volume (raw ÷ 10000)."
+                  note: "Always divide by 10000."
+              - name: SDSTAT
+                metadata:
+                  description: "Piece / shipment-line status."
+              - name: SDADDJ
+                metadata:
+                  description: "Actual ship date for the piece (Julian)."
+                  note: "Julian date."
+
+          - name: F41002
+            metadata:
+              description: "Item Units of Measure Conversion Factors — conversion ratios between
+                             UoMs for a given item (e.g. 1 CS = 24 EA). Essential when order line
+                             UoM differs from stocking UoM."
+              tags: ["item", "UoM", "conversion", "inventory", "O2C"]
+              note: "UMCONV is raw — divide by 10000. UMDIV='Y' means divide instead of multiply.
+                     Always apply when joining F4211 (order UoM) to F41021 (stocking UoM)."
+            columns:
+              - name: UMITM
+                metadata:
+                  description: "Short item number — FK to F4101.IMITM. Part of composite PK."
+              - name: UMUM
+                metadata:
+                  description: "From unit of measure (source UoM code)."
+              - name: UMRUM
+                metadata:
+                  description: "To unit of measure (target UoM code)."
+              - name: UMCONV
+                metadata:
+                  description: "Conversion factor (raw ÷ 10000) — multiply From-UoM quantity by this."
+                  note: "Always divide by 10000. Check UMDIV flag before applying."
+              - name: UMDIV
+                metadata:
+                  description: "Divisor flag — 'Y' means divide instead of multiply."
+                allowed_values: ["Y", "N"]
+              - name: UMSYS
+                metadata:
+                  description: "Conversion scope — 'M' item-master (item-specific), 'S' standard (system-wide)."
+                allowed_values: ["M", "S"]
+              - name: UMMCU
+                metadata:
+                  description: "Business unit — populated when conversion is branch-specific."
+      - name: EUCTL
+        metadata:
+          description: "JDE EnterpriseOne Control schema for Baxter EU instance — system-level
+                         configuration and reference tables. Primary use in O2C is F0005 (User
+                         Defined Codes) which provides all status, type and category code
+                         decoding across sales orders, AR, inventory and shipments."
+          tags: ["JDE", "control", "UDC", "reference", "lookup", "system-config", "O2C"]
+          note: "EUCTL is the control companion to EUDTA (data schema). Cross-schema joins
+                 from EUDTA transaction tables to EUCTL.F0005 are common for decoding
+                 status codes (40/AT), hold codes (42/HC), item categories (41/S1..S5)
+                 and document types (00/DT). Always qualify table references with schema
+                 prefix e.g. EUCTL.F0005."
+          additional_metadata:
+            owner: "Baxter Finance & Supply Chain"
+            region: "EU"
+            companion_schema: "EUDTA"
+        tables:
+         - name: F0005
+           metadata:
+              description: "User Defined Codes (UDC) — universal decode table. In O2C used to decode:
+                             40/AT (order activity/status), 42/HC (hold codes), 00/DT (document types),
+                             41/S1..S5 (item category codes), 03B/CB (chargeback reasons)."
+              tags: ["UDC", "decode", "lookup", "status-codes", "O2C"]
+              note: "Composite PK is DRSY + DRRT + DRKY. Always join on all three keys."
+           columns:
+              - name: DRSY
+                metadata:
+                  description: "Product code / system code — '40','42','00','41','03B' etc."
+                  note: "Part of composite PK. Common: '40'=Sales Order, '42'=AR, '41'=Inventory."
+              - name: DRRT
+                metadata:
+                  description: "User defined code type — 'AT','HC','DT','S1'..'S5','CB'."
+                  note: "Part of composite PK. Always specify DRSY + DRRT together."
+              - name: DRKY
+                metadata:
+                  description: "Actual code value. Part of composite PK."
+              - name: DRDL01
+                metadata:
+                  description: "Description 1 — human-readable label."
+              - name: DRDL02
+                metadata:
+                  description: "Description 2 — secondary label."
+              - name: DRSPHD
+                metadata:
+                  description: "Special handling code — extra classification per UDC."
+          
+        
+    
+# no tables = expose all tables and all columns
+
