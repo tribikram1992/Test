@@ -1,0 +1,111 @@
+template_version: "1.2"
+
+environments:
+  DV920:
+    jde_release: "9.2"
+    data:
+      BRANCH_PLANT: "30"
+      ITEM: "1001"
+      ITEM_2: "1002"
+      SOLD_TO: "4242"
+      SHIP_TO: "4242"
+  PY920:
+    jde_release: "9.2"
+    data:
+      BRANCH_PLANT: "30"
+      ITEM: "1001"
+      ITEM_2: "1002"
+      SOLD_TO: "4243"
+      SHIP_TO: "4243"
+  PD920:
+    jde_release: "9.2"
+    data:
+      BRANCH_PLANT: "30"
+      ITEM: "1001"
+      ITEM_2: "1002"
+      SOLD_TO: "4242"
+      SHIP_TO: "4242"
+
+test_cases:
+  - test_id: TC_IM_001
+    test_case_name: Add inventory by adjustment and verify on-hand quantity increases
+    scenario: Inventory addition - availability before and after
+    region: NA
+    country: US
+    language: EN
+    environments: [DV920, PY920]
+    fast_path: "P41202|ZJDE0001"
+    stages:
+      - seq: 1
+        application: P41202
+        form: W41202A
+        screen_data:
+          input:
+            Branch/Plant: "{{ENV:BRANCH_PLANT}}"
+            Item Number: "{{ENV:ITEM}}"
+        line_data:
+          - row: 1
+            capture:
+              Location: LOCN_PRIMARY
+              Quantity On Hand: QOH_BEFORE
+      - seq: 2
+        application: P4114
+        form: W4114A
+        screen_data:
+          input:
+            Branch/Plant: "{{ENV:BRANCH_PLANT}}"
+            G/L Date: "{{TODAY}}"
+            Transaction Date: "{{TODAY}}"
+            Explanation: "Automation stock add {{RND:6}}"
+          expected:
+            Document Type: IA
+        line_data:
+          - row: 1
+            input:
+              Item Number: "{{ENV:ITEM}}"
+              Quantity: "100"
+              UM: EA
+              Location: "{{CAP:LOCN_PRIMARY}}"
+      - seq: 3
+        application: P41202
+        form: W41202A
+        screen_data:
+          input:
+            Branch/Plant: "{{ENV:BRANCH_PLANT}}"
+            Item Number: "{{ENV:ITEM}}"
+        line_data:
+          - row: 1
+            expected:
+              Location: "{{CAP:LOCN_PRIMARY}}"
+              Quantity On Hand: "{{CAP:QOH_BEFORE}} + 100"
+
+  - test_id: TC_SO_001
+    test_case_name: Create standard sales order - one customer, two lines
+    scenario: O2C - Standard domestic sales order
+    region: NA
+    country: US
+    language: EN
+    environments: [DV920, PY920]
+    fast_path: "P4210|ZJDE0001"
+    stages:
+      - seq: 1
+        application: P4210
+        form: W4210A
+        screen_data:
+          input:
+            Branch/Plant: "{{ENV:BRANCH_PLANT}}"
+            Sold To: "{{ENV:SOLD_TO}}"
+            Ship To: "{{ENV:SHIP_TO}}"
+            Order Date: "{{TODAY}}"
+            Customer PO: "PO-{{RND:6}}"
+        line_data:
+          - row: 1
+            input:
+              Quantity Ordered: "10"
+              Item Number: "{{ENV:ITEM}}"
+              UoM: EA
+          - row: 2
+            input:
+              Quantity Ordered: "5"
+              Item Number: "{{ENV:ITEM_2}}"
+              UoM: EA
